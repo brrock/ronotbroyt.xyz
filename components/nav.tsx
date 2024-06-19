@@ -7,13 +7,8 @@ import { ModeToggle } from "./theme-toggle"
 
 export function Nav() {
   return (
-<<<<<<< HEAD
     <header className="flex h-16 items-center justify-between  px-4 md:px-6">
       <div className="flex items-center gap-4 text-center">
-=======
-    <header className="flex h-16 items-center justify-between px-4 md:px-6">
-      <div className="flex items-center gap-4">
->>>>>>> 1be49f91a8c39b3a681d9ccdc970cedc35cbc166
         <Link href="#">
           <div className="flex items-center gap-2">
             <span className="font-bold text-lg">RoNotBroYT</span>
@@ -32,12 +27,9 @@ export function Nav() {
         <Button asChild className="bg-red-700 hover:bg-red-800 dark:text-white " >
           <Link href="https://www.youtube.com/@RoNotBroYT">Youtube</Link>
         </Button>
-<<<<<<< HEAD
         <Button asChild className="bg-blue-700 hover:bg-blue-800 dark:text-white " >
           <Link href="https://www.discord.gg/VDQQvPQHjN">Discord</Link>
         </Button>
-=======
->>>>>>> 1be49f91a8c39b3a681d9ccdc970cedc35cbc166
         <ModeToggle />
       </div>
     </header>
