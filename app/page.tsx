@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BentoGridDemo } from '@/components/card'
 import { Nav } from '@/components/nav'
 import { Button } from '@/components/ui/button'
@@ -21,6 +22,14 @@ const Home = () => {
       <h1 className=' text-center  py-4 text-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-wrap'>Projects</h1>
       <BentoGridDemo />
     </div>
+=======
+import { Nav } from '@/components/nav'
+import React from 'react'
+
+const Home = () => {
+  return (
+    <div><Nav /></div>
+>>>>>>> 1be49f91a8c39b3a681d9ccdc970cedc35cbc166
   )
 }
 
