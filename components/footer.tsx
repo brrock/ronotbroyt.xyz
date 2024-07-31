@@ -22,7 +22,7 @@ import { JSX, SVGProps } from "react"
 
 export function Footer() {
   return (
-    <footer className="p-6 md:py-12 w-full bg-background border-t-2 border-t-gray-950 dark:border-t-slate-200 bottom-0 fixed">
+    <footer className="p-6 md:py-12 w-full bg-background border-t-2 border-t-gray-950 dark:border-t-slate-200 fixed bottom-0 left-0">
       <div className="container max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-6">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           
