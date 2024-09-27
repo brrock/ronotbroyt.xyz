@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Footer } from "@/components/footer";
+import sytles from "./bg.module.css"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-        {children}
+              
+      
+        <div className={sytles.backgroundImage}> {children}</div>
         <Footer />
         </ThemeProvider> </body> 
     </html>
