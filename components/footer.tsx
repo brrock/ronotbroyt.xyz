@@ -17,32 +17,21 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+import { Github } from "lucide-react"
 import Link from "next/link"
 import { JSX, SVGProps } from "react"
 
 export function Footer() {
   return (
-    <footer className="p-6 md:py-12 w-full bg-background border-t-2 border-t-gray-950 dark:border-t-slate-200 fixed bottom-0 left-0">
+    <footer className=" p-6 md:py-12 w-full bg-background border-t-2 border-t-gray-950 dark:border-t-slate-200  bottom-0 left-0">
       <div className="container max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-6">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           
-          <span className="text-lg font-semibold"> RoNotBroYT</span>
+          <span className="text-lg font-semibold object-bottom"> RoNotBroYT</span>
         </Link>
-        {/* <nav className="flex gap-4 sm:gap-6">
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Home
-          </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            About
-          </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Products
-          </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Contact
-          </Link>
-        </nav> */}
-        <p className="text-sm text-gray-500 dark:text-gray-400">Made by Benjy Ross, <Link href="https://github.com/brrock">My github, </Link> <Link href="https://benjyross.xyz">My website</Link> </p>
+        <p className="text-[0.00000001rem] text-gray-500 dark:text-gray-400"> 
+          <Link href="https://github.com/brrock/ronotbroyt.xyz"><Github/>  </Link>
+        </p>
       </div>
     </footer>
   )
