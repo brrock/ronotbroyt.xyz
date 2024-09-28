@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Inter as FontSans } from "next/font/google"
+import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider"
-import { Footer } from "@/components/footer";
-import sytles from "./bg.module.css"
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
 export const metadata: Metadata = {
   title: "RoNotBroYT",
-  description: "My official website.",
+  description: "My official website",
 };
 
 export default function RootLayout({
@@ -17,19 +21,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-      <ThemeProvider
+  <ClerkProvider
+      appearance={{
+          variables: {
+              colorPrimary: 'hsl(242, 96%, 57%)', // change this value (you can get it from you're css variables, make sure to include 'hsl' and commas)
+                  },
+              }}
+  >
+      <html lang="en">
+        <body className={cn("min-h-screen bg-background dark:text-white text-black font-sans antialiased", fontSans.variable)}>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-              
-      
-        <div className={sytles.backgroundImage}> {children}</div>
-        <Footer />
-        </ThemeProvider> </body> 
-    </html>
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
