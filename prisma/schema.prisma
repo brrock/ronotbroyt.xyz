@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,6 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id        String   @id @default(cuid())
   clerkId   String   @unique
@@ -15,10 +15,38 @@ model User {
   image_url String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  role    Role     @default(USER)
+  role      Role     @default(USER)
 }
+
+model ForumPost {
+  id        String         @id @default(cuid())
+  content   String
+  userId    String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  title     String
+  comments  ForumComment[] @relation("PostComments")
+}
+
+model ForumComment {
+  id        String    @id @default(cuid())
+  content   String
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  postId    String
+  post      ForumPost @relation("PostComments", fields: [postId], references: [id], onDelete: Cascade)
+}
+
 enum Role {
   USER
   ADMIN
   MOD
+}
+model BlogPost {
+  id String @id @default(cuid())
+  content String
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

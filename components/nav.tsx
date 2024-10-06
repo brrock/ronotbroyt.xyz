@@ -21,6 +21,15 @@ export function Nav() {
           <Link className="hover:underline" href="#">
             Blog
           </Link>
+          <Link className="hover:underline" href="/forum">
+            Forum
+          </Link>
+          <Link className="hover:underline" href="/sign-in">
+            Sign In 
+          </Link>
+          <Link className="hover:underline" href="/sign-up">
+            Sign Up 
+          </Link>
         </nav>
       </div>
       <div className="relative flex-1 max-w-md space-x-4">
