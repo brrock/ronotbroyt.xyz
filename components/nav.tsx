@@ -22,6 +22,9 @@ export function Nav() {
           <Link className="hover:underline" href="/forum">
             Forum
           </Link>
+          <Link className="hover:underline" href="/game">
+            Game
+          </Link>
 
         
         </nav>

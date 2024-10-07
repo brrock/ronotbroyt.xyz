@@ -5,7 +5,7 @@ import {
   IconBrandDiscord,
   IconBrandYoutube,
 } from "@tabler/icons-react";
-import { Signature } from "lucide-react";
+import { Signature, Gamepad } from "lucide-react";
 
 export function BentoGridDemo() {
   return (
@@ -48,5 +48,12 @@ const items = [
     header: <Skeleton />,
     icon: <IconBrandDiscord className="h-4 w-4 text-neutral-500" />,
     href: "https://www.discord.gg/VDQQvPQHjN",
+  },
+  {
+    title: "Game",
+    description: "Come play this fun block game",
+    header: <Skeleton />,
+    icon: <Gamepad className="h-4 w-4 text-neutral-500"  />,
+    href: "/game",
   },
 ];
