@@ -1,9 +1,7 @@
-
-import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import { JSX, SVGProps } from "react"
-import { Button } from "./ui/button"
-import { ModeToggle } from "./theme-toggle"
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { ModeToggle } from "./theme-toggle";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export function Nav() {
   return (
@@ -15,7 +13,7 @@ export function Nav() {
           </div>
         </Link>
         <nav className="hidden gap-4 text-sm font-medium md:flex">
-          <Link className="hover:underline" href="#">
+          <Link className="hover:underline" href="/">
             Home
           </Link>
           <Link className="hover:underline" href="#">
@@ -24,23 +22,46 @@ export function Nav() {
           <Link className="hover:underline" href="/forum">
             Forum
           </Link>
-          <Link className="hover:underline" href="/sign-in">
-            Sign In 
-          </Link>
-          <Link className="hover:underline" href="/sign-up">
-            Sign Up 
-          </Link>
+
+        
         </nav>
       </div>
       <div className="relative flex-1 max-w-md space-x-4">
-        <Button asChild className="bg-red-700 hover:bg-red-800 dark:text-white opacity-60" >
+        <Button
+          asChild
+          className="bg-red-700 hover:bg-red-800 dark:text-white opacity-60"
+        >
           <Link href="https://www.youtube.com/@RoNotBroYT">Youtube</Link>
         </Button>
-        <Button asChild className="bg-blue-700 hover:bg-blue-800 dark:text-white opacity-60" >
+        <Button
+          asChild
+          className="bg-blue-700 hover:bg-blue-800 dark:text-white opacity-60"
+        >
           <Link href="https://www.discord.gg/VDQQvPQHjN">Discord</Link>
         </Button>
+       <SignedOut>
+        <Button
+          asChild
+          className= "  bg-red-800 hover:bg-red-900 dark:text-white  opacity-60"
+        >
+          <Link className="" href="/sign-in">
+            Sign In
+          </Link>
+        </Button>
+        <Button
+          asChild
+          className= " bg-blue-800 hover:bg-blue-900 dark:text-white opacity-60"
+        >
+          <Link className="" href="/sign-up">
+            Sign Up
+          </Link>
+        </Button>
+        </SignedOut>
         <ModeToggle />
+        <SignedIn>
+        <UserButton />
+        </SignedIn>
       </div>
     </header>
-  )
+  );
 }

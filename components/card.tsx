@@ -5,6 +5,7 @@ import {
   IconBrandDiscord,
   IconBrandYoutube,
 } from "@tabler/icons-react";
+import { Signature } from "lucide-react";
 
 export function BentoGridDemo() {
   return (
@@ -35,10 +36,10 @@ const items = [
     href: "/",
   },
   {
-    title: "Second channel",
-    description: "Make sure to come check out",
+    title: "Forum",
+    description: "Come hang out with everyone ",
     header: <Skeleton />,
-    icon: <IconBrandYoutube className="h-4 w-4 text-neutral-500" />,
+    icon: <Signature className="h-4 w-4 text-neutral-500" />,
     href: "https://www.youtube.com/@RoNotBroYTreacts",
   },
   {
