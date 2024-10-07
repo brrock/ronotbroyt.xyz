@@ -7,7 +7,7 @@ export function Nav() {
   return (
     <header className="flex h-16 items-center justify-between  px-4 md:px-6">
       <div className="flex items-center gap-4 text-center">
-        <Link href="#">
+        <Link href="/">
           <div className="flex items-center gap-2">
             <span className="font-bold text-lg">RoNotBroYT</span>
           </div>
