@@ -40,7 +40,7 @@ const items = [
     description: "Come hang out with everyone ",
     header: <Skeleton />,
     icon: <Signature className="h-4 w-4 text-neutral-500" />,
-    href: "https://www.youtube.com/@RoNotBroYTreacts",
+    href: "/forum",
   },
   {
     title: "Discord",

@@ -4,3 +4,4 @@ next-env.d.ts
 .env
 # coming soon
 app/(admin)/
+test.ts
