@@ -42,7 +42,7 @@ export function PostContent({ post, userData }: PostContentProps) {
       <h2 className='text-left'>
         <Link href="/forum"><CornerUpLeft /> Back to Forum home</Link>
       </h2>
-      <Card className="w-full max-w-2xl mx-auto mb-8">
+      <Card className="w-full max-w-2xl mx-auto mb-8 opacity-70">
         <CardHeader>
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-bold mb-2">{post.title}</h1>

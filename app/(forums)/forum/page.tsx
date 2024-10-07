@@ -41,29 +41,34 @@ const PostCard: React.FC<{ post: ForumPost }> = async ({ post }) => {
   const userData = await fetchUserData(post.userId);
 
   return (
-   <Link href={`/forum/post/${post.id}`}>
-   <Card className="w-full">
-      <CardHeader className="flex flex-row justify-between items-start">
-        <h2 className="text-2xl font-bold text-center">{post.title}</h2>
-      </CardHeader>
-      <CardContent>
-      <div className='text-center' dangerouslySetInnerHTML={{ __html: post.content }}></div>
-      </CardContent>
-      <CardFooter className="flex justify-end items-center space-x-2">
-      <div className="flex items-center text-sm text-gray-500">
-                <Clock className="h-4 w-4 mr-1" />
-                <span>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</span>
-              </div>
-        <span className="text-sm text-gray-500 text-right">By {userData.username || 'Unknown User'}</span>
-        <Avatar>
-          <AvatarImage src={userData.image_url || undefined} alt={userData.username || 'Unknown User'} />
-          <AvatarFallback>
-            <User className="h-5 w-5" />
-          </AvatarFallback>
-        </Avatar>
-      </CardFooter>
-    </Card>
-   </Link>
+    <Link href={`/forum/post/${post.id}`}>
+      <Card className="w-full h-64 flex flex-col">
+        <CardHeader className="flex-shrink-0">
+          <h2 className="text-xl font-bold truncate">{post.title}</h2>
+        </CardHeader>
+        <CardContent className="flex-grow overflow-hidden">
+          <div 
+            className='text-sm line-clamp-4'
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </CardContent>
+        <CardFooter className="flex-shrink-0 flex justify-between items-center text-xs text-gray-500">
+          <div className="flex items-center">
+            <Clock className="h-3 w-3 mr-1" />
+            <span>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</span>
+          </div>
+          <div className="flex items-center overflow-hidden">
+            <span className="mr-2 truncate">By {userData.username || 'Unknown User'}</span>
+            <Avatar className="h-6 w-6 flex-shrink-0">
+              <AvatarImage src={userData.image_url || undefined} alt={userData.username || 'Unknown User'} />
+              <AvatarFallback>
+                <User className="h-4 w-4" />
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        </CardFooter>
+      </Card>
+    </Link>
   );
 };
 

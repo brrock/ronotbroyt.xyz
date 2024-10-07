@@ -151,7 +151,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 
   return (
     <div className="mt-8 space-y-8">
-      <Card>
+      <Card className='opacity-70'>
         <CardHeader>
           <CardTitle>Add a Comment</CardTitle>
         </CardHeader>
@@ -200,7 +200,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
         </Alert>
       )}
 
-      <Card>
+      <Card className='opacity-70'>
         <CardHeader>
           <CardTitle>Comments</CardTitle>
         </CardHeader>

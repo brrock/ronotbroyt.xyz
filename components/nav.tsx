@@ -27,18 +27,7 @@ export function Nav() {
         </nav>
       </div>
       <div className="relative flex-1 max-w-md space-x-4">
-        <Button
-          asChild
-          className="bg-red-700 hover:bg-red-800 dark:text-white opacity-60"
-        >
-          <Link href="https://www.youtube.com/@RoNotBroYT">Youtube</Link>
-        </Button>
-        <Button
-          asChild
-          className="bg-blue-700 hover:bg-blue-800 dark:text-white opacity-60"
-        >
-          <Link href="https://www.discord.gg/VDQQvPQHjN">Discord</Link>
-        </Button>
+       
        <SignedOut>
         <Button
           asChild
