@@ -8,6 +8,7 @@ const nextConfig = {
           // This option disables TypeScript type checking during the build process
           ignoreBuildErrors: true,
         },
+
 };
 
 export default nextConfig;

@@ -21,4 +21,13 @@ export interface UserData {
     createdAt: string;
     updatedAt: string;
     comments: Comment[];
+    pinned: boolean;
+  }
+export interface blogPost {
+    id: string;
+    title: string;
+    content: string;
+    userId: string;
+    createdAt: string;
+    updatedAt: string;
   }

@@ -3,21 +3,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'
 import prisma from '@/db/prisma'
-import { Clock, Pin, Plus, User } from 'lucide-react'
+import { Clock, Plus, User, Loader2 } from 'lucide-react'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
-import { format, formatDistanceToNow } from 'date-fns';
+import {  formatDistanceToNow } from 'date-fns';
 import { Footer } from '@/components/footer'
+import { BlogPost } from '@prisma/client'
 
-interface ForumPost {
-  pinned: boolean
-  id: string;
-  title: string;
-  content: string;
-  userId: string;
-  createdAt: Date;
-}
 async function fetchUserData(userId: string) {
   try {
     const headersList = headers();
@@ -38,15 +31,14 @@ async function fetchUserData(userId: string) {
     throw error;
   }
 }
-const PostCard: React.FC<{ post: ForumPost }> = async ({ post }) => {
+const PostCard: React.FC<{ post: BlogPost }> = async ({ post }) => {
   const userData = await fetchUserData(post.userId);
 
   return (
-    <Link href={`/forum/post/${post.id}`}>
-      <Card className={`w-full h-64 flex flex-col ${post.pinned ? 'border-2 border-blue-500' : ''}`}>
-        <CardHeader className="flex-shrink-0 flex justify-between items-center">
+    <Link href={`/blog/post/${post.id}`}>
+      <Card className="w-full h-64 flex flex-col">
+        <CardHeader className="flex-shrink-0">
           <h2 className="text-xl font-bold truncate">{post.title}</h2>
-          {post.pinned && <Pin className="h-5 w-5 text-blue-500" />}
         </CardHeader>
         <CardContent className="flex-grow overflow-hidden">
           <div 
@@ -75,37 +67,31 @@ const PostCard: React.FC<{ post: ForumPost }> = async ({ post }) => {
 };
 
 const Page = async () => {
-  const posts = await prisma.forumPost.findMany({
-    orderBy: [
-      { pinned: 'desc' },
-      { createdAt: 'desc' }
-    ]
-  }) as ForumPost[];
+  const posts = await prisma.blogPost.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  }) as BlogPost[];
 
   return (
-    <>
-      <div>
-        <Nav />
-        <div className="flex flex-col items-center space-y-4">
-          <h1 className='text-center py-4 text-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap'>
-            RoNotBroYT forums
-          </h1>
-          <Button asChild>
-            <Link href="forum/create/"><Plus /> Create new post</Link>
-          </Button>
-          <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 opacity-70'>
-            {posts.map(post => (
-              <li key={post.id} className={post.pinned ? 'col-span-full' : ''}>
-                <React.Suspense fallback={<div>Loading...</div>}>
-                  <PostCard post={post} />
-                </React.Suspense>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <><div>
+      
+      <div className="flex flex-col items-center space-y-4">
+        <h1 className='text-center py-4 text-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap'>
+           Blog
+        </h1>
+      
+        <ul className='grid grid-cols-3 gap-4 opacity-70'>
+          {posts.map(post => (
+            <li key={post.id}>
+              <React.Suspense fallback={<div><Loader2 /></div>}>
+                <PostCard post={post} />
+              </React.Suspense>
+            </li>
+          ))}
+        </ul>
       </div>
-      <Footer />
-    </>
+    </div></>
   );
 };
 

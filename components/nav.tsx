@@ -16,7 +16,7 @@ export function Nav() {
           <Link className="hover:underline" href="/">
             Home
           </Link>
-          <Link className="hover:underline" href="#">
+          <Link className="hover:underline" href="/blog">
             Blog
           </Link>
           <Link className="hover:underline" href="/forum">

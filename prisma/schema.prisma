@@ -22,6 +22,7 @@ model ForumPost {
   id        String         @id @default(cuid())
   content   String
   userId    String
+  pinned Boolean @default(false)
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
   title     String
@@ -49,4 +50,5 @@ model BlogPost {
   userId    String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  title String 
 }
