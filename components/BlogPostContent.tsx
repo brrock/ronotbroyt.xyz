@@ -1,18 +1,17 @@
 "use client";
-
 import React from 'react';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
-import { Clock, CornerUpLeft, MessageSquare, UserIcon } from 'lucide-react';
+import { Clock, CornerUpLeft, UserIcon } from 'lucide-react';
 import { blogPost, UserData } from '@/shared/types';
 import { DeleteMenu } from '@/components/DeleteMenu';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 
 interface PostContentProps {
-  post: blogPost;
+  post: blogPost | null;
   userData: UserData | null;
 }
 
@@ -20,9 +19,10 @@ export function PostContent({ post, userData }: PostContentProps) {
   const { user } = useUser();
   const router = useRouter();
 
-  const canDelete = user && (user.id === post.userId || userData?.role === 'ADMIN');
+  const canDelete = user && post && (user.id === post.userId || userData?.role === 'ADMIN');
 
   const handleDeletePost = async () => {
+    if (!post) return;
     try {
       const response = await fetch(`/api/posts/${post.id}`, {
         method: 'DELETE',
@@ -30,12 +30,15 @@ export function PostContent({ post, userData }: PostContentProps) {
       if (!response.ok) {
         throw new Error('Failed to delete post');
       }
-      router.push('/forum'); // Redirect to forum home after successful deletion
+      router.push('/forum');
     } catch (error) {
       console.error('Error deleting post:', error);
-      // You might want to show an error message to the user here
     }
   };
+
+  if (!post) {
+    return <div>Loading post content...</div>;
+  }
 
   return (
     <>
@@ -45,7 +48,7 @@ export function PostContent({ post, userData }: PostContentProps) {
       <Card className="w-full max-w-2xl mx-auto mb-8 opacity-70">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+            <h1 className="text-3xl font-bold mb-2">{post.title || 'Untitled'}</h1>
             {canDelete && <DeleteMenu onDelete={handleDeletePost} />}
           </div>
           <div className="flex items-center space-x-4">
@@ -68,12 +71,9 @@ export function PostContent({ post, userData }: PostContentProps) {
           <div className='text-left' dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </CardContent>
         <CardFooter className="flex justify-between items-center">
-          <div className="flex items-center text-sm text-gray-500">
-            <MessageSquare className="h-4 w-4 mr-1" />
-           
-          </div>
-          <span className="text-sm text-gray-500">
-            Last updated: {formatDistanceToNow(new Date(post.updatedAt), { addSuffix: true })}
+          
+          <span className="text-sm text-gray-500 flex flex-row gap-4">
+            <Clock className="h-4 w-4 mr-1" />  {formatDistanceToNow(new Date(post.updatedAt), { addSuffix: true })}
           </span>
         </CardFooter>
       </Card>

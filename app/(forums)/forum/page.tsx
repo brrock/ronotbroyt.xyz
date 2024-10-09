@@ -95,7 +95,7 @@ const Page = async () => {
           </Button>
           <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 opacity-70'>
             {posts.map(post => (
-              <li key={post.id} className={post.pinned ? 'col-span-full' : ''}>
+              <li key={post.id}>
                 <React.Suspense fallback={<div>Loading...</div>}>
                   <PostCard post={post} />
                 </React.Suspense>

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Suspense } from 'react';
 import prisma from '@/db/prisma';
-import { Nav } from '@/components/nav';
-import { PostContent } from '@/components/PostContent';
-import { headers } from 'next/headers';
+import { PostContent } from '@/components/BlogPostContent';
+import { notFound } from 'next/navigation';
 import { UserData, blogPost } from '@/shared/types';
+import { headers } from 'next/headers';
 
-async function fetchUserData(userId: string) {
+async function getUserData(userId: string) {
   try {
     const headersList = headers();
     const protocol = headersList.get('x-forwarded-proto') || 'http';
@@ -33,23 +32,16 @@ async function getPostData(id: string): Promise<{ post: blogPost; userData: User
   });
 
   if (!post) {
-    throw new Error('Post not found');
+    notFound();
   }
 
-  const postAuthor = await fetchUserData(post.userId);
+  const userData = await getUserData(post.userId);
 
   const formattedPost: blogPost = {
     ...post,
     createdAt: post.createdAt.toISOString(),
     updatedAt: post.updatedAt.toISOString(),
   };
-
-  const userData: UserData | null = postAuthor ? {
-    id: postAuthor.id,
-    username: postAuthor.username,
-    image_url: postAuthor.image_url,
-    role: postAuthor.role,
-  } : null;
 
   return { post: formattedPost, userData };
 }
@@ -59,11 +51,9 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="min-h-screen">
-      <Nav />
+     
       <main className="container mx-auto px-4 py-8">
-        <Suspense fallback={<div>Loading post content...</div>}>
-          <PostContent blog={post} userData={userData} />
-        </Suspense>
+        <PostContent post={post} userData={userData} />
       </main>
     </div>
   );

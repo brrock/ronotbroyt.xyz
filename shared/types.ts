@@ -1,4 +1,4 @@
-export interface UserData {
+  export interface UserData {
     id: string;
     username: string | null;
     image_url: string | null;
@@ -23,11 +23,11 @@ export interface UserData {
     comments: Comment[];
     pinned: boolean;
   }
-export interface blogPost {
+  export interface blogPost {
     id: string;
-    title: string;
+    title: string | "null";
     content: string;
-    userId: string;
+    userId: string | null;
     createdAt: string;
     updatedAt: string;
   }
