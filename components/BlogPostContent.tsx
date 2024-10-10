@@ -24,7 +24,7 @@ export function PostContent({ post, userData }: PostContentProps) {
   const handleDeletePost = async () => {
     if (!post) return;
     try {
-      const response = await fetch(`/api/posts/${post.id}`, {
+      const response = await fetch(`/api/blogposts/${post.id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
