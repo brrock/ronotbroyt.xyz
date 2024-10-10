@@ -83,25 +83,14 @@ const Page = async () => {
       createdAt: "desc",
     },
   })) as BlogPost[];
-  const headersList = headers();
-  const protocol = headersList.get("x-forwarded-proto") || "http";
-  const host = headersList.get("host") || "localhost:3000";
-  const baseUrl = `${protocol}://${host}`;
-  
-  const userid = await fetch(`${baseUrl}/api/user`, { next: { revalidate: 60 } }).then((res) => res.json());
-  const data = await fetchUserData(userid.userId);
-  const isAdmin = data && data?.role === "ADMIN";
+ 
   return (
     <>
       <div>
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-center py-4 text-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap">
             Blog{" "}
-            {isAdmin ? (
-              <Button asChild>
-                <Link href={`/admin/`}>Create a New Post</Link>
-              </Button>
-            ) : null}
+         
           </h1>
 
           <ul className="grid grid-cols-3 gap-4 opacity-70">
