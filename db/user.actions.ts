@@ -27,7 +27,7 @@ export async function updateUser(
   user: {
     username: string | null;
     image_url: string;
-  }
+  },
 ) {
   try {
     const updatedUser = await prisma.user.update({

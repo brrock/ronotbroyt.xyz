@@ -25,33 +25,30 @@ export function Nav() {
           <Link className="hover:underline" href="/game">
             Game
           </Link>
-
-        
         </nav>
       </div>
       <div className="relative flex-1 max-w-md space-x-4">
-       
-       <SignedOut>
-        <Button
-          asChild
-          className= "  bg-red-800 hover:bg-red-900 dark:text-white  opacity-60"
-        >
-          <Link className="" href="/sign-in">
-            Sign In
-          </Link>
-        </Button>
-        <Button
-          asChild
-          className= " bg-blue-800 hover:bg-blue-900 dark:text-white opacity-60"
-        >
-          <Link className="" href="/sign-up">
-            Sign Up
-          </Link>
-        </Button>
+        <SignedOut>
+          <Button
+            asChild
+            className="  bg-red-800 hover:bg-red-900 dark:text-white  opacity-60"
+          >
+            <Link className="" href="/sign-in">
+              Sign In
+            </Link>
+          </Button>
+          <Button
+            asChild
+            className=" bg-blue-800 hover:bg-blue-900 dark:text-white opacity-60"
+          >
+            <Link className="" href="/sign-up">
+              Sign Up
+            </Link>
+          </Button>
         </SignedOut>
         <ModeToggle />
         <SignedIn>
-        <UserButton />
+          <UserButton />
         </SignedIn>
       </div>
     </header>

@@ -14,7 +14,7 @@ const Home = () => {
       <h2 className="text-center  py-4 text-4xl font-black text-wrap">
         Here are some of the latest projects I&apos;m working on
       </h2>
-      <div className="flex justify-center space-x-4">
+      <div className="flex justify-center space-x-4 sm:hidden md:hidden">
         <Button
           asChild
           className="bg-red-700 hover:bg-red-800 dark:text-white p-6 text-lg  opacity-60"
@@ -28,16 +28,22 @@ const Home = () => {
           <Link href="https://www.discord.gg/VDQQvPQHjN">Discord</Link>
         </Button>
         <SignedOut>
-        <Button asChild className=" bg-blue-800 hover:bg-blue-900 dark:text-white  p-6 text-lg opacity-60">
-          <Link className="" href="/sign-in">
-            Sign In
-          </Link>
-        </Button>
-        <Button asChild className="  bg-red-800 hover:bg-red-900 dark:text-white text-lg p-6 opacity-60">
-          <Link className="" href="/sign-up">
-            Sign Up
-          </Link>
-        </Button>
+          <Button
+            asChild
+            className=" bg-blue-800 hover:bg-blue-900 dark:text-white  p-6 text-lg opacity-60"
+          >
+            <Link className="" href="/sign-in">
+              Sign In
+            </Link>
+          </Button>
+          <Button
+            asChild
+            className="  bg-red-800 hover:bg-red-900 dark:text-white text-lg p-6 opacity-60"
+          >
+            <Link className="" href="/sign-up">
+              Sign Up
+            </Link>
+          </Button>
         </SignedOut>
       </div>
       <br />

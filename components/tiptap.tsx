@@ -1,18 +1,14 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import TextStyle from '@tiptap/extension-text-style';
-import { Color } from '@tiptap/extension-color';
-import { Button } from '@/components/ui/button';
-import { Bold, Italic, Send } from 'lucide-react';
+import React from "react";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import TextStyle from "@tiptap/extension-text-style";
+import { Color } from "@tiptap/extension-color";
+import { Button } from "@/components/ui/button";
+import { Bold, Italic, Send } from "lucide-react";
 
-const extensions = [
-  StarterKit,
-  TextStyle,
-  Color,
-];
+const extensions = [StarterKit, TextStyle, Color];
 
 interface TipTapProps {
   content: string;
@@ -22,12 +18,12 @@ interface TipTapProps {
   submitLabel?: string;
 }
 
-const TipTap: React.FC<TipTapProps> = ({ 
-  content, 
-  setContent, 
-  onSubmit, 
-  placeholder = 'Write something...', 
-  submitLabel = 'Submit' 
+const TipTap: React.FC<TipTapProps> = ({
+  content,
+  setContent,
+  onSubmit,
+  placeholder = "Write something...",
+  submitLabel = "Submit",
 }) => {
   const editor = useEditor({
     extensions,
@@ -37,7 +33,8 @@ const TipTap: React.FC<TipTapProps> = ({
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none',
+        class:
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none",
       },
     },
     placeholder,
@@ -54,10 +51,15 @@ const TipTap: React.FC<TipTapProps> = ({
     label: string;
   }
 
-  const ControlButton: React.FC<ControlButtonProps> = ({ onClick, isActive, icon: Icon, label }) => (
+  const ControlButton: React.FC<ControlButtonProps> = ({
+    onClick,
+    isActive,
+    icon: Icon,
+    label,
+  }) => (
     <Button
       onClick={onClick}
-      variant={isActive ? 'secondary' : 'outline'}
+      variant={isActive ? "secondary" : "outline"}
       size="icon"
       title={label}
     >
@@ -70,13 +72,13 @@ const TipTap: React.FC<TipTapProps> = ({
       <div className="mb-2 flex gap-2">
         <ControlButton
           onClick={() => editor.chain().focus().toggleBold().run()}
-          isActive={editor.isActive('bold')}
+          isActive={editor.isActive("bold")}
           icon={Bold}
           label="Bold"
         />
         <ControlButton
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          isActive={editor.isActive('italic')}
+          isActive={editor.isActive("italic")}
           icon={Italic}
           label="Italic"
         />

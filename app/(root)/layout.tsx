@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
-import sytles from "../bg.module.css"
+import sytles from "../bg.module.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,6 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <><div className={sytles.backgroundImage}> {children}</div><Footer /></>
+    <>
+      <div className={sytles.backgroundImage}> {children}</div>
+      <Footer />
+    </>
   );
 }

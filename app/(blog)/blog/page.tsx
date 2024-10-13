@@ -83,14 +83,13 @@ const Page = async () => {
       createdAt: "desc",
     },
   })) as BlogPost[];
- 
+
   return (
     <>
       <div>
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-center py-4 text-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap">
             Blog{" "}
-         
           </h1>
 
           <ul className="grid grid-cols-3 gap-4 opacity-70">

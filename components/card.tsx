@@ -53,7 +53,7 @@ const items = [
     title: "Game",
     description: "Come play this fun block game",
     header: <Skeleton />,
-    icon: <Gamepad className="h-4 w-4 text-neutral-500"  />,
+    icon: <Gamepad className="h-4 w-4 text-neutral-500" />,
     href: "/game",
   },
 ];

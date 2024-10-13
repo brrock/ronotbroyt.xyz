@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google"
+import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: "RoNotBroYT",
@@ -21,15 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-  <ClerkProvider
+    <ClerkProvider
       appearance={{
-          variables: {
-              colorPrimary: 'hsl(242, 96%, 57%)', // change this value (you can get it from you're css variables, make sure to include 'hsl' and commas)
-                  },
-              }}
-  >
+        variables: {
+          colorPrimary: "hsl(242, 96%, 57%)", // change this value (you can get it from you're css variables, make sure to include 'hsl' and commas)
+        },
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
-        <body className={cn("min-h-screen bg-background dark:text-white text-black font-sans antialiased", fontSans.variable)}>
+        <body
+          className={cn(
+            "min-h-screen bg-background dark:text-white text-black font-sans antialiased",
+            fontSans.variable,
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

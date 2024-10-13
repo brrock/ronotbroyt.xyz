@@ -1,7 +1,7 @@
 // File: app/api/save-post/route.ts
 
-import { NextResponse } from 'next/server';
-import prisma from '@/db/prisma'; // Adjust this import based on your Prisma client location
+import { NextResponse } from "next/server";
+import prisma from "@/db/prisma"; // Adjust this import based on your Prisma client location
 
 export async function POST(request: Request) {
   try {
@@ -15,9 +15,12 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ message: 'Post saved successfully', postId: post.id }, { status: 200 });
+    return NextResponse.json(
+      { message: "Post saved successfully", postId: post.id },
+      { status: 200 },
+    );
   } catch (error) {
-    console.error('Error saving post:', error);
-    return NextResponse.json({ message: 'Error saving post' }, { status: 500 });
+    console.error("Error saving post:", error);
+    return NextResponse.json({ message: "Error saving post" }, { status: 500 });
   }
 }

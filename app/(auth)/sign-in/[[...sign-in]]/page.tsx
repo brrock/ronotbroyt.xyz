@@ -7,14 +7,18 @@ import Link from "next/link";
 export default function Page() {
   return (
     <>
-      <Button asChild variant="outline" className='right-18 fixed top-3'>
-        <Link href="/"><House /></Link>
+      <Button asChild variant="outline" className="right-18 fixed top-3">
+        <Link href="/">
+          <House />
+        </Link>
       </Button>
-      <Button asChild className='top-3 fixed right-5'>
+      <Button asChild className="top-3 fixed right-5">
         <Link href="/sign-up">Sign Up</Link>
       </Button>
       <div className="top-3 fixed left-5">
-        <ModeToggle /></div><SignIn />
+        <ModeToggle />
+      </div>
+      <SignIn />
     </>
-  )
+  );
 }

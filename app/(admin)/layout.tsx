@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import sytles from "@/app/bg.module.css"
+import sytles from "@/app/bg.module.css";
 import React from "react";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
@@ -17,9 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={sytles.backgroundImage} > 
-    <Nav />
-    {children}
-    <Footer /> </div>
+    <div className={sytles.backgroundImage}>
+      <Nav />
+      {children}
+      <Footer />{" "}
+    </div>
   );
 }

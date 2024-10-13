@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, Trash } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal, Trash } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface DeleteMenuProps {
   onDelete: () => void;
