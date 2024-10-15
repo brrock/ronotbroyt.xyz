@@ -5,7 +5,7 @@ import {
   IconBrandDiscord,
   IconBrandYoutube,
 } from "@tabler/icons-react";
-import { Signature, Gamepad } from "lucide-react";
+import { Signature, Gamepad, Bot } from "lucide-react";
 
 export function BentoGridDemo() {
   return (
@@ -55,5 +55,12 @@ const items = [
     header: <Skeleton />,
     icon: <Gamepad className="h-4 w-4 text-neutral-500" />,
     href: "/game",
+  },
+  {
+    title: "AI",
+    description: "My very own AI",
+    header: <Skeleton />,
+    icon: <Bot className="h-4 w-4 text-neutral-500" />,
+    href: "https://ai.ronotbroyt.xyz",
   },
 ];
