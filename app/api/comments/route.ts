@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import prisma from "@/db/prisma";
 import { Comment, UserData } from "@/shared/types";
+import { auth } from "@clerk/nextjs/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
               image_url: null,
               role: "USER" as const,
             };
-      }),
+      })
     );
 
     return NextResponse.json({ comments, userData });
@@ -43,13 +43,13 @@ export async function GET(req: NextRequest) {
     console.error("Error fetching comments:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
 export async function POST(req: NextRequest) {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     if (!content || !postId) {
       return NextResponse.json(
         { error: "Content and postId are required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     console.error("Error creating comment:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
