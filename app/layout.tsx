@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({
         },
       }}
     >
+      
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
@@ -42,6 +44,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Analytics />
+           
             {children}
           </ThemeProvider>
         </body>
