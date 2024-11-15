@@ -23,8 +23,8 @@ export default function Page() {
         );
         const userDataJson = await userDataResponse.json();
 
-        // setIsAdmin(userDataJson.role === "ADMIN");
-        setIsAdmin(true);
+        setIsAdmin(userDataJson.role === "ADMIN");
+        // setIsAdmin(true);
       } catch (err) {
         console.error("Error checking admin status:", err);
         setIsAdmin(false);

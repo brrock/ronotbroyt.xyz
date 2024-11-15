@@ -1,15 +1,14 @@
-import React from "react";
-import { Suspense } from "react";
-import prisma from "@/db/prisma";
+import { CommentSection } from "@/components/CommentSection";
 import { Nav } from "@/components/nav";
 import { PostContent } from "@/components/PostContent";
-import { CommentSection } from "@/components/CommentSection";
+import prisma from "@/db/prisma";
+import { Post, UserData } from "@/shared/types";
 import { headers } from "next/headers";
-import { UserData, Post, Comment } from "@/shared/types";
+import { Suspense } from "react";
 
 async function fetchUserData(userId: string) {
   try {
-    const headersList = headers();
+    const headersList = await headers();
     const protocol = headersList.get("x-forwarded-proto") || "http";
     const host = headersList.get("host") || "localhost:3000";
     const baseUrl = `${protocol}://${host}`;
@@ -28,9 +27,7 @@ async function fetchUserData(userId: string) {
   }
 }
 
-async function getPostData(
-  id: string,
-): Promise<{
+async function getPostData(id: string): Promise<{
   post: Post;
   userData: UserData | null;
   commentUserData: UserData[];
@@ -88,7 +85,7 @@ async function getPostData(
             image_url: null,
             role: "USER" as const,
           };
-    }),
+    })
   );
 
   return { post: formattedPost, userData, commentUserData };

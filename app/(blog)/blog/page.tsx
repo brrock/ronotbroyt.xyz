@@ -1,22 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
   CardContent,
   CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import prisma from "@/db/prisma";
-import { Clock, User, Loader2 } from "lucide-react";
+import { BlogPost } from "@prisma/client";
+import { formatDistanceToNow } from "date-fns";
+import { Clock, Loader2, User } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
-import { formatDistanceToNow } from "date-fns";
-import { BlogPost } from "@prisma/client";
 
 async function fetchUserData(userId: string) {
   try {
-    const headersList = headers();
+    const headersList = await headers();
     const protocol = headersList.get("x-forwarded-proto") || "http";
     const host = headersList.get("host") || "localhost:3000";
     const baseUrl = `${protocol}://${host}`;

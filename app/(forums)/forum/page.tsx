@@ -1,19 +1,19 @@
+import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
   CardContent,
   CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import prisma from "@/db/prisma";
+import { formatDistanceToNow } from "date-fns";
 import { Clock, Pin, Plus, User } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
-import { format, formatDistanceToNow } from "date-fns";
-import { Footer } from "@/components/footer";
 
 interface ForumPost {
   pinned: boolean;
@@ -25,7 +25,7 @@ interface ForumPost {
 }
 async function fetchUserData(userId: string) {
   try {
-    const headersList = headers();
+    const headersList = await headers();
     const protocol = headersList.get("x-forwarded-proto") || "http";
     const host = headersList.get("host") || "localhost:3000";
     const baseUrl = `${protocol}://${host}`;
@@ -49,7 +49,9 @@ const PostCard: React.FC<{ post: ForumPost }> = async ({ post }) => {
   return (
     <Link href={`/forum/post/${post.id}`}>
       <Card
-        className={`w-full h-64 flex flex-col ${post.pinned ? "border-2 border-blue-500" : ""}`}
+        className={`w-full h-64 flex flex-col ${
+          post.pinned ? "border-2 border-blue-500" : ""
+        }`}
       >
         <CardHeader className="flex-shrink-0 flex justify-between items-center">
           <h2 className="text-xl font-bold truncate">{post.title}</h2>

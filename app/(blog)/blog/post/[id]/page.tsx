@@ -1,13 +1,12 @@
-import React from "react";
-import prisma from "@/db/prisma";
 import { PostContent } from "@/components/BlogPostContent";
-import { notFound } from "next/navigation";
+import prisma from "@/db/prisma";
 import { UserData, blogPost } from "@/shared/types";
 import { headers } from "next/headers";
+import { notFound } from "next/navigation";
 
 async function getUserData(userId: string) {
   try {
-    const headersList = headers();
+    const headersList = await headers();
     const protocol = headersList.get("x-forwarded-proto") || "http";
     const host = headersList.get("host") || "localhost:3000";
     const baseUrl = `${protocol}://${host}`;
@@ -27,7 +26,7 @@ async function getUserData(userId: string) {
 }
 
 async function getPostData(
-  id: string,
+  id: string
 ): Promise<{ post: blogPost; userData: UserData | null }> {
   const post = await prisma.blogPost.findUnique({
     where: { id },
