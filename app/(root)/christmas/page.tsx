@@ -17,7 +17,7 @@ const Home = async () => {
           <Link href="/">
           <CornerUpLeft /> Back  home
         </Link>
-          <h1 className="text-center  py-4 text-boldtext-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap">Merry Christmas </h1>
+          <h1 className="text-center text-black py-4 text-boldtext-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap">Merry Christmas </h1>
           <div className="  rounded-lg p-4">
             <ChristmasGamesCollection />
           </div>
