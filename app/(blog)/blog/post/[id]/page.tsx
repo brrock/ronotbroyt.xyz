@@ -47,7 +47,8 @@ async function getPostData(
   return { post: formattedPost, userData };
 }
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { post, userData } = await getPostData(params.id);
 
   return (

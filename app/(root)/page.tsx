@@ -1,5 +1,5 @@
 import { BentoGridDemo } from "@/components/card";
-import ChristmasCountdown from "@/components/chrismas";
+import ChristmasCountdown from "@/components/christmascount";
 import { Nav } from "@/components/nav";
 
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,10 @@ const Home = async () => {
       </h1>
       {christmas && (
         <div className="flex justify-center items-center relative">
-          <ChristmasCountdown />
+          <Button variant="default"><Link href="/christmas">
+            Come play some christmas games
+          </Link>
+          </Button>
         </div>
       )}
       <h2 className="text-center  py-4 text-4xl font-black text-wrap">
