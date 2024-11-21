@@ -12,8 +12,8 @@ importers:
         specifier: ^0.0.55
         version: 0.0.55(zod@3.23.8)
       '@blocknote/core':
-        specifier: ^0.19.1
-        version: 0.19.1(@types/hast@3.0.4)
+        specifier: ^0.19.2
+        version: 0.19.2(@types/hast@3.0.4)
       '@blocknote/mantine':
         specifier: ^0.19.1
         version: 0.19.1(@tiptap/pm@2.9.1)(@types/hast@3.0.4)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -267,8 +267,8 @@ packages:
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
-  '@blocknote/core@0.19.1':
-    resolution: {integrity: sha512-iscYwOm5F57wA/d+4YK9Cy3k9Gi4d3uW3/QhMOBGzJ9I1OfxzSBQ45gIMLk/3n5chWz/AzeRdG3hizm3zux8iQ==}
+  '@blocknote/core@0.19.2':
+    resolution: {integrity: sha512-ULX1R2lST8YjSGWzAKZ3BkESUtV+aKa/VJje7E265H5/83L+czkD8H3BHoES4Allec2f/cyLVC9dS5eHbd/YAA==}
 
   '@blocknote/mantine@0.19.1':
     resolution: {integrity: sha512-Al0tPTDCIx9fFQZFf7gFB8qjMWYGYWeVZz8I1Dk3wat1SHXPa7IeM/7nvIZFnhovCo9xcZvrBPx3AgrN/RIMPg==}
@@ -3904,7 +3904,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@blocknote/core@0.19.1(@types/hast@3.0.4)':
+  '@blocknote/core@0.19.2(@types/hast@3.0.4)':
     dependencies:
       '@emoji-mart/data': 1.2.1
       '@tiptap/core': 2.9.1(@tiptap/pm@2.9.1)
@@ -3959,7 +3959,7 @@ snapshots:
 
   '@blocknote/mantine@0.19.1(@tiptap/pm@2.9.1)(@types/hast@3.0.4)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.19.1(@types/hast@3.0.4)
+      '@blocknote/core': 0.19.2(@types/hast@3.0.4)
       '@blocknote/react': 0.19.1(@tiptap/pm@2.9.1)(@types/hast@3.0.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.14.0(@mantine/hooks@7.14.0(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.14.0(react@18.3.1)
@@ -3979,7 +3979,7 @@ snapshots:
 
   '@blocknote/react@0.19.1(@tiptap/pm@2.9.1)(@types/hast@3.0.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.19.1(@types/hast@3.0.4)
+      '@blocknote/core': 0.19.2(@types/hast@3.0.4)
       '@floating-ui/react': 0.26.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tiptap/core': 2.9.1(@tiptap/pm@2.9.1)
       '@tiptap/react': 2.9.1(@tiptap/core@2.9.1(@tiptap/pm@2.9.1))(@tiptap/pm@2.9.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3998,7 +3998,7 @@ snapshots:
 
   '@blocknote/shadcn@0.19.1(@tiptap/pm@2.9.1)(@types/hast@3.0.4)(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.19.1(@types/hast@3.0.4)
+      '@blocknote/core': 0.19.2(@types/hast@3.0.4)
       '@blocknote/react': 0.19.1(@tiptap/pm@2.9.1)(@types/hast@3.0.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@hookform/resolvers': 3.9.1(react-hook-form@7.53.2(react@18.3.1))
       '@radix-ui/react-dropdown-menu': 2.1.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
