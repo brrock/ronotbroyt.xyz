@@ -120,8 +120,8 @@ importers:
         specifier: ^5.22.0
         version: 5.22.0
       prisma-extension-redis:
-        specifier: ^1.2.0
-        version: 1.2.0(prisma@5.22.0)
+        specifier: ^3.0.0
+        version: 3.0.0(prisma@5.22.0)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1500,9 +1500,6 @@ packages:
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
 
-  '@yxx4c/cache-utils@0.0.7':
-    resolution: {integrity: sha512-/JuP5jYd2uTdY1a8JuGN35bBLhMBjY62LSf0aI1LhVYe6Im/wZWp3ny8WyE27AiPSQt34uEvdhn0JknGX36CyA==}
-
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1613,9 +1610,6 @@ packages:
 
   ast-types-flow@0.0.8:
     resolution: {integrity: sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==}
-
-  async-cache-dedupe@2.2.0:
-    resolution: {integrity: sha512-jl4L6dGC+KLB/LIA1iIBiq7eWQ43K7lIcIdwbUUwRmfT209yH8Xm1uPTOxxlNQ7XD6/XHU7xhSr/NgPxlH04MQ==}
 
   async-retry@1.3.3:
     resolution: {integrity: sha512-wfr/jstw9xNi/0teMHrRW7dsz3Lt5ARhYNZ2ewpadnhaIp5mbALhOAP+EAdsC7t4Z6wqsDVv9+W6gm1Dk9mEyw==}
@@ -2327,6 +2321,10 @@ packages:
     resolution: {integrity: sha512-2YZsvl7jopIa1gaePkeMtd9rAcSjOOjPtpcLlOeusyO+XH2SK5ZcT+UCrElPP+WVIInh2TzeI4XW9ENaSLVVHA==}
     engines: {node: '>=12.22.0'}
 
+  iovalkey@0.2.1:
+    resolution: {integrity: sha512-uHwgaumQRkSb6jHA5Xpo5IKzvjQjZxRMoGuYaCv77Uu3mOM5RsogO2NZaGriIpbCoeSM0lSF6XlcAKu95l+vxw==}
+    engines: {node: '>=12.22.0'}
+
   is-array-buffer@3.0.4:
     resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
     engines: {node: '>= 0.4'}
@@ -2770,9 +2768,6 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mnemonist@0.39.8:
-    resolution: {integrity: sha512-vyWo2K3fjrUw8YeeZ1zF0fy6Mu59RHokURlld8ymdUPjMlD9EC9ov1/YPqTgqRvUN9nTr3Gqfz29LYAmu0PHPQ==}
-
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -2850,6 +2845,9 @@ packages:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
 
+  object-code@1.3.3:
+    resolution: {integrity: sha512-/Ds4Xd5xzrtUOJ+xJQ57iAy0BZsZltOHssnDgcZ8DOhgh41q1YJCnTPnWdWSLkNGNnxYzhYChjc5dgC9mEERCA==}
+
   object-hash@3.0.0:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
@@ -2881,9 +2879,6 @@ packages:
   object.values@1.2.0:
     resolution: {integrity: sha512-yBYjY9QX2hnRmZHAjG/f13MzmBzxzYgQhFrke06TTyKY5zSTEqkOeukBzIdVA3j3ulu8Qa3MbVFShV7T2RmGtQ==}
     engines: {node: '>= 0.4'}
-
-  obliterator@2.0.4:
-    resolution: {integrity: sha512-lgHwxlxV1qIg1Eap7LgIeoBWIMFibOjbrYPIPJZcI1mmGAI2m3lNYpK12Y+GBdPQ0U1hRwSord7GIaawz962qQ==}
 
   oniguruma-to-es@0.1.2:
     resolution: {integrity: sha512-sBYKVJlIMB0WPO+tSu/NNB1ytSFeHyyJZ3Ayxfx3f/QUuXu0lvZk0VB4K7npmdlHSC0ldqanzh/sUSlAbgCTfw==}
@@ -2996,13 +2991,17 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prisma-extension-redis@1.2.0:
-    resolution: {integrity: sha512-Px82QXL9Z5vTsfwEA9E10FWan0KdT/q8OqcasGEL++kiOIFy0lyzKZptRogvg30wccWlY5e9eWkZ7QUOO02eng==}
+  prisma-extension-redis@3.0.0:
+    resolution: {integrity: sha512-GiVf6y2hJ1QNkUXQnceBgD+mNyl3Rompod+R92IdeTSE1S8XWankNKSH6yrQDKMuDvLaq0MIzI6TBdiziYKfpg==}
 
   prisma@5.22.0:
     resolution: {integrity: sha512-vtpjW3XuYCSnMsNVBjLMNkTj6OZbudcPPTPYHqX0CJfpcdWciI1dM8uHETwmDxxiqEwCIE6WvXucWUetJgfu/A==}
     engines: {node: '>=16.13'}
     hasBin: true
+
+  promise-coalesce@1.1.2:
+    resolution: {integrity: sha512-zLaJ9b8hnC564fnJH6NFSOGZYYdzrAJn2JUUIwzoQb32fG2QAakpDNM+CZo1km6keXkRXRM+hml1BFAPVnPkxg==}
+    engines: {node: '>=16'}
 
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -3287,10 +3286,6 @@ packages:
   safe-regex-test@1.0.3:
     resolution: {integrity: sha512-CdASjNJPvRa7roO6Ra/gLYBTzYzzPyyBXxIMdGW3USQLyjWEls2RgW5UBTXaQVp+OrpeCK3bLem8smtmheoRuw==}
     engines: {node: '>= 0.4'}
-
-  safe-stable-stringify@2.5.0:
-    resolution: {integrity: sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==}
-    engines: {node: '>=10'}
 
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
@@ -5252,10 +5247,6 @@ snapshots:
 
   '@vue/shared@3.5.13': {}
 
-  '@yxx4c/cache-utils@0.0.7':
-    dependencies:
-      lodash-es: 4.17.21
-
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
       acorn: 8.14.0
@@ -5390,11 +5381,6 @@ snapshots:
       is-shared-array-buffer: 1.0.3
 
   ast-types-flow@0.0.8: {}
-
-  async-cache-dedupe@2.2.0:
-    dependencies:
-      mnemonist: 0.39.8
-      safe-stable-stringify: 2.5.0
 
   async-retry@1.3.3:
     dependencies:
@@ -6327,6 +6313,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  iovalkey@0.2.1:
+    dependencies:
+      '@ioredis/commands': 1.2.0
+      cluster-key-slot: 1.1.2
+      debug: 4.3.7
+      denque: 2.1.0
+      lodash.defaults: 4.2.0
+      lodash.isarguments: 3.1.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   is-array-buffer@3.0.4:
     dependencies:
       call-bind: 1.0.7
@@ -6925,10 +6925,6 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  mnemonist@0.39.8:
-    dependencies:
-      obliterator: 2.0.4
-
   mri@1.2.0: {}
 
   ms@2.1.3: {}
@@ -6993,6 +6989,8 @@ snapshots:
 
   object-assign@4.1.1: {}
 
+  object-code@1.3.3: {}
+
   object-hash@3.0.0: {}
 
   object-inspect@1.13.3: {}
@@ -7030,8 +7028,6 @@ snapshots:
       call-bind: 1.0.7
       define-properties: 1.2.1
       es-object-atoms: 1.0.0
-
-  obliterator@2.0.4: {}
 
   oniguruma-to-es@0.1.2:
     dependencies:
@@ -7132,13 +7128,14 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prisma-extension-redis@1.2.0(prisma@5.22.0):
+  prisma-extension-redis@3.0.0(prisma@5.22.0):
     dependencies:
       '@prisma/client': 5.22.0(prisma@5.22.0)
-      '@yxx4c/cache-utils': 0.0.7
-      async-cache-dedupe: 2.2.0
-      ioredis: 5.4.1
+      iovalkey: 0.2.1
+      lodash-es: 4.17.21
       micromatch: 4.0.8
+      object-code: 1.3.3
+      promise-coalesce: 1.1.2
     transitivePeerDependencies:
       - prisma
       - supports-color
@@ -7148,6 +7145,8 @@ snapshots:
       '@prisma/engines': 5.22.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  promise-coalesce@1.1.2: {}
 
   prop-types@15.8.1:
     dependencies:
@@ -7488,8 +7487,6 @@ snapshots:
       call-bind: 1.0.7
       es-errors: 1.3.0
       is-regex: 1.1.4
-
-  safe-stable-stringify@2.5.0: {}
 
   scheduler@0.23.2:
     dependencies:
