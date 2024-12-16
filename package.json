@@ -14,7 +14,7 @@
     "@blocknote/core": "^0.19.1",
     "@blocknote/mantine": "^0.19.1",
     "@blocknote/react": "^0.19.1",
-    "@blocknote/shadcn": "^0.19.1",
+    "@blocknote/shadcn": "^0.21.0",
     "@clerk/nextjs": "^5.7.2",
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^5.22.0",
