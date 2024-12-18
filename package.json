@@ -10,7 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@ai-sdk/google": "^0.0.55",
+    "@ai-sdk/google": "^1.0.11",
     "@blocknote/core": "^0.19.1",
     "@blocknote/mantine": "^0.19.1",
     "@blocknote/react": "^0.19.1",
