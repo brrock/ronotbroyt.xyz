@@ -1,3 +1,4 @@
+
 import ChristmasGamesCollection from "@/components/christmas";
 import ChristmasCountdown from "@/components/christmascount";
 import { get } from "@vercel/edge-config";

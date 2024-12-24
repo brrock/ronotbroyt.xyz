@@ -14,16 +14,18 @@ const Home = async () => {
     <div>
       <Nav />
       <h1 className=" text-center  py-4 text-boldtext-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-wrap">
-        Welcome to RoNotBroYT&apos;s offical website 
+        Welcome to RoNotBroYT&apos;s offical website
       </h1>
       {christmas && (
-        <div className="flex justify-center items-center relative">
-          <Button variant="default"><Link href="/christmas">
-            Come play some christmas games
-          </Link>
-          </Button>
-        </div>
-      )}
+        <><div className="flex justify-center items-center relative">
+          <ChristmasCountdown /> <br />
+        </div><Button variant="default"><Link href="/christmas">
+          Come play some christmas games
+       
+        </Link>
+          </Button></>
+      )
+      }
       <h2 className="text-center  py-4 text-4xl font-black text-wrap">
         Here are some of the latest projects I&apos;m working on
       </h2>
@@ -34,7 +36,7 @@ const Home = async () => {
         >
           <Link href="https://www.youtube.com/@RoNotBroYT">Youtube</Link>
         </Button>
-         
+
       </div>
       <br />
       <h1 className=" text-center  py-4 text-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-wrap">
@@ -43,6 +45,5 @@ const Home = async () => {
       <BentoGridDemo />
     </div>
   );
-};
-
+}
 export default Home;

@@ -12,7 +12,7 @@ import {
   Star,
   Candy
 } from "lucide-react";
-
+import SantaTracker  from "./santa"
 // Types
 interface Coordinates {
   lat: number;
@@ -161,7 +161,7 @@ const generateNewGifts = (count: number): Gift[] => {
 };
 
 // Components
-const SantaLocationInfo: React.FC<{ location: Location }> = ({ location }) => (
+const SantaLocationInfo: ReaFC<{ location: Location }> = ({ location }) => (
   <div className="flex items-center gap-2">
     <MapPin className="text-green-500" />
     <div className="flex flex-col">
@@ -304,6 +304,7 @@ const AdvancedSantaTracker: React.FC = () => {
               </div>
             )}
           </div>
+          <SantaTracker />
         </div>
       </CardContent>
     </Card>
