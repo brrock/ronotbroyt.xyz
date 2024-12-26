@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import useSWR from 'swr'
 import dynamic from 'next/dynamic'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -41,11 +41,18 @@ interface SantaData {
 export default function SantaTracker() {
   const [center, setCenter] = useState<[number, number]>([84.6, 168])
   const [zoom, setZoom] = useState(2)
+  const mapRef = useRef<L.Map | null>(null)
 
   const { data, error, isLoading } = useSWR<SantaData>(
     'https://firebasestorage.googleapis.com/v0/b/santa-tracker-firebase.appspot.com/o/route%2Fsanta_en.json?alt=media&2018b',
     fetcher
   )
+
+  const isAfterChristmas = useCallback(() => {
+    const now = new Date()
+    const christmas = new Date(now.getFullYear(), 11, 25, 23, 59, 59)
+    return now > christmas
+  }, [])
 
   const currentDate = new Date()
   const currentYear = currentDate.getFullYear()
@@ -73,7 +80,46 @@ export default function SantaTracker() {
     }
   }, [currentLocation])
 
+  const handleZoomToSanta = useCallback(() => {
+    if (currentLocation) {
+      setCenter([currentLocation.location.lat, currentLocation.location.lng])
+      setZoom(6)
+      // Smooth animation
+      mapRef.current?.flyTo(
+        [currentLocation.location.lat, currentLocation.location.lng],
+        6,
+        {
+          duration: 1.5
+        }
+      )
+    }
+  }, [currentLocation])
+
   if (error) return <div>Failed to load Santa&apos;s route</div>
+  if (isAfterChristmas()) {
+    return (
+      <Card className="w-full max-w-4xl shadow-lg">
+        <CardHeader className="bg-red-600 text-white">
+          <CardTitle className="text-3xl font-bold">Santa&apos;s Taking a Break</CardTitle>
+          <CardDescription className="text-white/80">
+            Santa has finished his deliveries for this year!
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="text-center space-y-4">
+            <div className="text-6xl">🎅</div>
+            <h3 className="text-2xl font-bold text-red-800">
+              See You Next Christmas!
+            </h3>
+            <p className="text-muted-foreground">
+              Santa and his elves are back at the North Pole, preparing for next year&apos;s Christmas.
+              Come back on December 24th to track Santa&apos;s journey!
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
 
   return (
     <Card className="w-full max-w-4xl shadow-lg">
@@ -102,15 +148,16 @@ export default function SantaTracker() {
                 </p>
               </div>
             )}
-            <Map center={center} zoom={zoom} className="h-[400px] rounded-md shadow-md" destinations={destinations} currentDate={currentDate} />
+            <Map 
+              center={center} 
+              zoom={zoom} 
+              className="h-[400px] rounded-lg border bg-muted/50 shadow-sm" 
+              destinations={destinations} 
+              currentDate={currentDate} 
+            />
             <Button 
               className="w-full bg-red-600 hover:bg-red-700 text-white"
-              onClick={() => {
-                if (currentLocation) {
-                  setCenter([currentLocation.location.lat, currentLocation.location.lng])
-                  setZoom(8)
-                }
-              }}
+              onClick={handleZoomToSanta}
             >
               Zoom to Santa&apos;s Location
               <ChevronRight className="ml-2" size={16} />

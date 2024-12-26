@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { 
@@ -13,6 +13,8 @@ import {
   Candy
 } from "lucide-react";
 import SantaTracker  from "./santa"
+import { cn } from "@/lib/utils";
+import ChristmasCountdown from './christmascount';
 // Types
 interface Coordinates {
   lat: number;
@@ -92,11 +94,21 @@ interface Gift {
   wrapped: boolean;
 }
 
+interface PowerUp {
+  type: 'speedBoost' | 'timeFreeze' | 'multiWrap';
+  icon: string;
+  duration: number;
+  active: boolean;
+}
+
 interface GameState {
   isActive: boolean;
   score: number;
   timeLeft: number;
   highScore: number;
+  combo: number;
+  powerUps: PowerUp[];
+  level: number;
 }
 
 // Constants
@@ -124,6 +136,22 @@ const GIFT_TYPES: GiftType[] = [
   { name: "LEGO Set", icon: "🧩", points: 25 },
   { name: "Book", icon: "📖", points: 30 }
 ];
+
+const INITIAL_GAME_STATE: GameState = {
+  isActive: false,
+  score: 0,
+  timeLeft: 30,
+  highScore: 0,
+  combo: 1,
+  powerUps: [],
+  level: 1
+}
+
+const POWER_UPS: PowerUp[] = [
+  { type: 'speedBoost', icon: '⚡', duration: 10, active: false },
+  { type: 'timeFreeze', icon: '❄️', duration: 5, active: false },
+  { type: 'multiWrap', icon: '✨', duration: 8, active: false }
+]
 
 // Utility functions
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
@@ -161,7 +189,7 @@ const generateNewGifts = (count: number): Gift[] => {
 };
 
 // Components
-const SantaLocationInfo: ReaFC<{ location: Location }> = ({ location }) => (
+const SantaLocationInfo: React.FC<{ location: Location }> = ({ location }) => (
   <div className="flex items-center gap-2">
     <MapPin className="text-green-500" />
     <div className="flex flex-col">
@@ -253,14 +281,14 @@ const AdvancedSantaTracker: React.FC = () => {
   }, [routeData]);
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Rocket className="text-red-500" />
+    <Card className="w-full bg-[#0A0A0A] text-white">
+      <CardHeader className="p-4 pb-2">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <Rocket className="text-red-500 h-5 w-5" />
           Live Santa Tracker
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4">
         <div className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <SantaLocationInfo location={santaData.currentLocation} />
@@ -312,31 +340,91 @@ const AdvancedSantaTracker: React.FC = () => {
 };
 
 const ElfGiftWrappingChallenge: React.FC = () => {
-  const [gameState, setGameState] = useState<GameState>({
-    isActive: false,
-    score: 0,
-    timeLeft: 60,
-    highScore: 0
-  });
-
-  const [gifts, setGifts] = useState<Gift[]>([]);
+  const [gameState, setGameState] = useState<GameState>(INITIAL_GAME_STATE)
+  const [gifts, setGifts] = useState<Gift[]>([])
+  const [shake, setShake] = useState(false)
 
   const startGame = useCallback(() => {
-    setGifts(generateNewGifts(12));
+    setGifts(generateNewGifts(12))
+    setGameState({
+      ...INITIAL_GAME_STATE,
+      isActive: true,
+      powerUps: POWER_UPS.map(p => ({ ...p, active: false }))
+    })
+  }, [])
+
+  // Add power-up logic
+  const activatePowerUp = useCallback((type: PowerUp['type']) => {
     setGameState(prev => ({
       ...prev,
-      isActive: true,
-      score: 0,
-      timeLeft: 60
-    }));
-  }, []);
+      powerUps: prev.powerUps.map(p =>
+        p.type === type ? { ...p, active: true } : p
+      )
+    }))
 
+    setTimeout(() => {
+      setGameState(prev => ({
+        ...prev,
+        powerUps: prev.powerUps.map(p =>
+          p.type === type ? { ...p, active: false } : p
+        )
+      }))
+    }, POWER_UPS.find(p => p.type === type)!.duration * 1000)
+  }, [])
+
+  const wrapGift = useCallback((giftId: string) => {
+    if (!gameState.isActive) return
+
+    setGifts(prev => {
+      const gift = prev.find(g => g.id === giftId)
+      if (!gift || gift.wrapped) return prev
+
+      const multiWrapActive = gameState.powerUps.find(p => p.type === 'multiWrap')?.active
+      const updatedGifts = prev.map(g =>
+        multiWrapActive ? { ...g, wrapped: true } : 
+        g.id === giftId ? { ...g, wrapped: true } : g
+      )
+
+      // Update score with combo multiplier
+      setGameState(prevState => {
+        const newCombo = prevState.combo + 0.1
+        const comboBonus = Math.floor(gift.type.points * newCombo)
+        
+        return {
+          ...prevState,
+          score: prevState.score + comboBonus,
+          combo: newCombo,
+          level: Math.floor(prevState.score / 1000) + 1
+        }
+      })
+
+      // Shake effect
+      setShake(true)
+      setTimeout(() => setShake(false), 200)
+
+      // Random power-up chance
+      if (Math.random() < 0.1) {
+        const randomPowerUp = POWER_UPS[Math.floor(Math.random() * POWER_UPS.length)]
+        activatePowerUp(randomPowerUp.type)
+      }
+
+      // Generate new gifts if all are wrapped, but don't increase time
+      if (updatedGifts.every(g => g.wrapped)) {
+        return generateNewGifts(12)
+      }
+
+      return updatedGifts
+    })
+  }, [gameState.isActive, gameState.powerUps, activatePowerUp])
+
+  // Update the game over logic in useEffect
   useEffect(() => {
     if (!gameState.isActive || gameState.timeLeft <= 0) return;
 
     const timer = setInterval(() => {
       setGameState(prev => {
         if (prev.timeLeft <= 1) {
+          // Update high score when game ends
           return {
             ...prev,
             isActive: false,
@@ -344,6 +432,7 @@ const ElfGiftWrappingChallenge: React.FC = () => {
             highScore: Math.max(prev.highScore, prev.score)
           };
         }
+        // Simply decrease time
         return { ...prev, timeLeft: prev.timeLeft - 1 };
       });
     }, 1000);
@@ -351,71 +440,74 @@ const ElfGiftWrappingChallenge: React.FC = () => {
     return () => clearInterval(timer);
   }, [gameState.isActive, gameState.timeLeft]);
 
-  const wrapGift = useCallback((giftId: string) => {
-    if (!gameState.isActive) return;
-
-    setGifts(prev => {
-      const gift = prev.find(g => g.id === giftId);
-      if (!gift || gift.wrapped) return prev;
-
-      const updatedGifts = prev.map(g =>
-        g.id === giftId ? { ...g, wrapped: true } : g
-      );
-
-      setGameState(prevState => ({
-        ...prevState,
-        score: prevState.score + gift.type.points
-      }));
-
-      if (updatedGifts.every(g => g.wrapped)) {
-        setGameState(prev => ({
-          ...prev,
-          timeLeft: prev.timeLeft + 10
-        }));
-        return generateNewGifts(12);
-      }
-
-      return updatedGifts;
-    });
-  }, [gameState.isActive]);
-
+  // Update the return JSX with new UI elements
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Candy />
+    <Card className={cn(
+      "w-full bg-[#0A0A0A] text-white", 
+      shake && "animate-shake"
+    )}>
+      <CardHeader className="p-4 pb-2">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <Gift className="text-red-500 h-5 w-5" />
           Elf Gift Wrapping Challenge
         </CardTitle>
+        <CardDescription className="text-gray-400">
+          Level {gameState.level} - Combo x{gameState.combo.toFixed(1)}
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
+      <CardContent className="p-4">
+        <div className="space-y-4">
           <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-1">
-              <div className="text-sm text-gray-500">Score</div>
-              <div className="text-2xl font-bold">{gameState.score}</div>
+            <div>
+              <div className="text-sm text-gray-400">Score</div>
+              <div className="text-xl font-bold">{gameState.score}</div>
             </div>
-            <div className="space-y-1">
-              <div className="text-sm text-gray-500">High Score</div>
-              <div className="text-2xl font-bold">{gameState.highScore}</div>
+            <div>
+              <div className="text-sm text-gray-400">High Score</div>
+              <div className="text-xl font-bold">{gameState.highScore}</div>
             </div>
-            <div className="space-y-1">
-              <div className="text-sm text-gray-500">Time Left</div>
-              <div className="text-2xl font-bold">{gameState.timeLeft}s</div>
+            <div>
+              <div className="text-sm text-gray-400">Time Left</div>
+              <div className="text-xl font-bold">{gameState.timeLeft}s</div>
             </div>
           </div>
 
-          <div className="grid grid-cols-4 gap-2">
+          {/* Power-ups with reduced size */}
+          {gameState.isActive && (
+            <div className="flex gap-2 justify-center">
+              {gameState.powerUps.map(powerUp => (
+                <div
+                  key={powerUp.type}
+                  className={cn(
+                    "p-1.5 rounded-full text-sm",
+                    powerUp.active 
+                      ? "bg-green-500 animate-pulse" 
+                      : "bg-gray-800"
+                  )}
+                >
+                  {powerUp.icon}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Gift grid with smaller buttons */}
+          <div className="grid grid-cols-3 gap-2">
             {gifts.map(gift => (
               <Button
                 key={gift.id}
                 variant={gift.wrapped ? "secondary" : "default"}
                 onClick={() => wrapGift(gift.id)}
                 disabled={!gameState.isActive || gift.wrapped}
-                className="h-16 w-full text-2xl relative"
+                className={cn(
+                  "h-12 w-full text-lg relative",
+                  gift.wrapped && "bg-green-900/20",
+                  !gift.wrapped && "hover:scale-105"
+                )}
               >
                 {gift.wrapped ? "🎁" : gift.type.icon}
                 {!gift.wrapped && (
-                  <span className="absolute bottom-1 right-1 text-xs bg-white/80 rounded px-1">
+                  <span className="absolute bottom-0.5 right-0.5 text-[10px] bg-black/50 rounded px-1">
                     +{gift.type.points}
                   </span>
                 )}
@@ -426,8 +518,7 @@ const ElfGiftWrappingChallenge: React.FC = () => {
           {!gameState.isActive && (
             <Button 
               onClick={startGame} 
-              className="w-full"
-              size="lg"
+              className="w-full bg-red-500 hover:bg-red-600 text-white"
             >
               {gameState.score > 0 ? "Play Again" : "Start Wrapping"}
             </Button>
@@ -435,22 +526,21 @@ const ElfGiftWrappingChallenge: React.FC = () => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
 // Christmas Games Collection
 export const ChristmasGamesCollection: React.FC = () => {
   return (
-    <div className="s">
-     
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 gap-4">
-      <div > 
+    <div className="w-full flex flex-col items-center gap-8">
+      <div className="w-full max-w-2xl">
+        <ChristmasCountdown />
+      </div>
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
         <AdvancedSantaTracker />
         <ElfGiftWrappingChallenge />
       </div>
-      </div>
-      </div>
+    </div>
   );
 };
 

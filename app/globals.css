@@ -316,3 +316,30 @@ h1[data-localization-key="userProfile.navbar.title"] {
 .ProseMirror [style*="font-size: 20px"] {
   font-size: 20px !important;
 }
+
+/* Add these Leaflet-specific styles */
+.leaflet-popup-content-wrapper {
+  @apply bg-background text-foreground rounded-lg shadow-lg border;
+}
+
+.leaflet-popup-tip {
+  @apply bg-background;
+}
+
+.leaflet-container {
+  @apply bg-muted/50 dark:bg-muted;
+}
+
+.custom-div-icon {
+  @apply bg-transparent border-none;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out;
+}
