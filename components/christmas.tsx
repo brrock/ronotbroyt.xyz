@@ -290,10 +290,7 @@ const AdvancedSantaTracker: React.FC = () => {
       </CardHeader>
       <CardContent className="p-4">
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <SantaLocationInfo location={santaData.currentLocation} />
-            <TimeToChristmasDisplay time={santaData.timeToChristmas} />
-          </div>
+        
 
           <div className="space-y-4">
             <div>

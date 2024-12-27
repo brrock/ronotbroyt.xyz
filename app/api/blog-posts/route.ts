@@ -1,7 +1,25 @@
-// app/api/blog-posts/route.ts
 import prisma from "@/db/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
+
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest) {
+  try {
+    const blogPosts = await prisma.blogPost.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+    return NextResponse.json(blogPosts);
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch blog posts" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {

@@ -3,6 +3,8 @@ import { Comment, UserData } from "@/shared/types";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const postId = searchParams.get("postId");
@@ -64,7 +66,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const comment: Comment = await prisma.forumComment.create({
+    const comment = await prisma.forumComment.create({
       data: {
         content,
         userId,

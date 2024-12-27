@@ -1,5 +1,4 @@
 import ChristmasGamesCollection from "@/components/christmas";
-import ChristmasCountdown from "@/components/christmascount";
 import { get } from "@vercel/edge-config";
 import { CornerUpLeft } from "lucide-react";
 import Link from "next/link";

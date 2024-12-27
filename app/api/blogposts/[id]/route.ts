@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/db/prisma";
+export const dynamic = 'force-dynamic';
 
 export async function DELETE(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -33,7 +34,7 @@ export async function DELETE(req: NextRequest, props: { params: Promise<{ id: st
       { message: "Post  deleted successfully" },
       { status: 200 },
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error deleting post:", error);
     if (error.code === "P2003") {
       return NextResponse.json(

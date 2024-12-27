@@ -1,8 +1,6 @@
-// File: app/api/save-post/route.ts
-
 import { NextResponse } from "next/server";
 import prisma from "@/db/prisma"; // Adjust this import based on your Prisma client location
-
+export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
   try {
     const { userId, content, title } = await request.json();

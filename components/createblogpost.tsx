@@ -106,7 +106,7 @@ const BlogPostEditor = () => {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to save blog post");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error saving blog post:", error);
       setSubmitStatus({
         type: "error",
@@ -165,7 +165,7 @@ const BlogPostEditor = () => {
           onChange={(e) => setTitle(e.target.value)}
           className="mb-4"
         />
-        <BlockNoteView editor={editor} />
+        <BlockNoteView editor={editor}  />
         <div className="mt-4">
           <Button
             onClick={handleSubmit}

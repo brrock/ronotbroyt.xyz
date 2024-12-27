@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 
 import { createUser, deleteUser, updateUser } from "@/db/user.actions";
-import { clerkClient, WebhookEvent } from "@clerk/nextjs/server";
+import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
+export const dynamic = 'force-dynamic';
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -70,13 +71,19 @@ export async function POST(req: Request) {
 
       // Set public metadata
       if (newUser) {
-        await clerkClient.users.updateUser(id, {
-          publicMetadata: {
-            userId: newUser.id,
+        await fetch(`https://api.clerk.com/v1/users/${id}/metadata`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${process.env.CLERK_SECRET_KEY}`,
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            publicMetadata: {
+              userId: newUser.id,
+            },
+          }),
         });
       } else {
-        await clerkClient.users.deleteUser(id);
         return NextResponse.redirect("/");
       }
 
