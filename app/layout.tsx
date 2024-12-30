@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+
 
 export const metadata: Metadata = {
   title: "RoNotBroYT",
@@ -34,7 +31,7 @@ export default function RootLayout({
         <body
           className={cn(
             "min-h-screen bg-background dark:text-white text-black font-sans antialiased",
-            fontSans.variable,
+            GeistSans.variable,
           )}
         >
           <ThemeProvider
