@@ -117,8 +117,8 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       npm-check-updates:
-        specifier: ^17.1.12
-        version: 17.1.12
+        specifier: ^17.1.13
+        version: 17.1.13
       prisma:
         specifier: ^6.1.0
         version: 6.1.0
@@ -3012,8 +3012,8 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
 
-  npm-check-updates@17.1.12:
-    resolution: {integrity: sha512-j1+ln9wXDNLgTSMrEF9ja4KyYq4yBF8FuuU3irFtMSnss4pYjvYfQESz8CV82Rk1daXjbtaAWF9pZZKzujhoBA==}
+  npm-check-updates@17.1.13:
+    resolution: {integrity: sha512-m9Woo2J5XVab0VcQpYvrQ0hx3ySI1mGbiHR595mc6Lr1/FIaTWvv+oU+T1WKSfXRiluKC/V5P6Bdk5agaYpqqg==}
     engines: {node: ^18.18.0 || >=20.0.0, npm: '>=8.12.1'}
     hasBin: true
 
@@ -7360,7 +7360,7 @@ snapshots:
 
   normalize-range@0.1.2: {}
 
-  npm-check-updates@17.1.12: {}
+  npm-check-updates@17.1.13: {}
 
   object-assign@4.1.1: {}
 
