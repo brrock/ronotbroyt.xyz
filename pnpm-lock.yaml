@@ -64,10 +64,10 @@ importers:
         version: 3.26.0(react@19.0.0)
       '@tiptap/extension-color':
         specifier: ^2.10.4
-        version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/extension-text-style@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4)))
+        version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/extension-text-style@2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4)))
       '@tiptap/extension-text-style':
-        specifier: ^2.10.4
-        version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
+        specifier: ^2.11.0
+        version: 2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
       '@tiptap/pm':
         specifier: ^2.10.4
         version: 2.10.4
@@ -1446,8 +1446,8 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
-  '@tiptap/extension-text-style@2.10.4':
-    resolution: {integrity: sha512-ibq7avkcwHyUSG53Hf+P31rrwsKVbbiqbWZM4kXC7M2X3iUwFrtvaa+SWzyWQfE1jl2cCrD1+rfSkj/alcOKGg==}
+  '@tiptap/extension-text-style@2.11.0':
+    resolution: {integrity: sha512-vuA16wMZ6J3fboL7FObwV2f5uN9Vg0WYmqU7971vxzJyaRj9VE1eeH8Kh5fq4RgwDzc13MZGvZZV4HcE1R8o8A==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
@@ -5188,10 +5188,10 @@ snapshots:
       '@tiptap/pm': 2.10.4
       y-prosemirror: 1.2.13(prosemirror-model@1.23.0)(prosemirror-state@1.4.3)(prosemirror-view@1.37.1)(y-protocols@1.0.6(yjs@13.6.20))(yjs@13.6.20)
 
-  '@tiptap/extension-color@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/extension-text-style@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4)))':
+  '@tiptap/extension-color@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/extension-text-style@2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4)))':
     dependencies:
       '@tiptap/core': 2.10.4(@tiptap/pm@2.10.4)
-      '@tiptap/extension-text-style': 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
+      '@tiptap/extension-text-style': 2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
 
   '@tiptap/extension-document@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))':
     dependencies:
@@ -5306,7 +5306,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.9.1(@tiptap/pm@2.10.4)
 
-  '@tiptap/extension-text-style@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))':
+  '@tiptap/extension-text-style@2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))':
     dependencies:
       '@tiptap/core': 2.10.4(@tiptap/pm@2.10.4)
 
@@ -5388,7 +5388,7 @@ snapshots:
       '@tiptap/extension-paragraph': 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
       '@tiptap/extension-strike': 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
       '@tiptap/extension-text': 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
-      '@tiptap/extension-text-style': 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
+      '@tiptap/extension-text-style': 2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
       '@tiptap/pm': 2.10.4
 
   '@types/debug@4.1.12':
