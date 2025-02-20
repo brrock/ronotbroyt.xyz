@@ -52,3 +52,27 @@ model BlogPost {
   updatedAt DateTime  @updatedAt
   title String 
 }
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        DateTime
+  type        EventType
+  status      EventStatus @default(UPCOMING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum EventType {
+  STREAM
+  MEETUP
+  GAME_NIGHT
+  SPECIAL_EVENT
+}
+
+enum EventStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+}

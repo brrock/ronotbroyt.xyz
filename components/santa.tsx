@@ -133,7 +133,7 @@ export default function SantaTracker() {
         ) : (
           <div className="space-y-6">
             {currentLocation && (
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 shadow-sm">
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 shadow-xs">
                 <h3 className="text-2xl font-bold text-red-800 flex items-center">
                   <MapPin className="mr-2" size={24} />
                   Santa is in {currentLocation.city}, {currentLocation.region}!
@@ -151,7 +151,7 @@ export default function SantaTracker() {
             <Map 
               center={center} 
               zoom={zoom} 
-              className="h-[400px] rounded-lg border bg-muted/50 shadow-sm" 
+              className="h-[400px] rounded-lg border bg-muted/50 shadow-xs" 
               destinations={destinations} 
               currentDate={currentDate} 
             />

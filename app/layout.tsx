@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { Geist, Geist_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "RoNotBroYT",
@@ -22,16 +29,16 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         variables: {
-          colorPrimary: "hsl(242, 96%, 57%)", // change this value (you can get it from you're css variables, make sure to include 'hsl' and commas)
+          colorPrimary: "hsl(242, 96%, 57%)", 
         },
       }}
     >
-      
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
-            "min-h-screen bg-background dark:text-white text-black font-sans antialiased",
-            GeistSans.variable,
+            "min-h-screen bg-background dark:text-white text-black antialiased",
+            geistSans.className,
+         
           )}
         >
           <ThemeProvider
@@ -41,11 +48,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Analytics />
-           
             {children}
           </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
   );
-}
+} 

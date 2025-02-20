@@ -111,7 +111,7 @@ const Map = ({ center, zoom, className, destinations, currentDate }: MapProps) =
     <div 
       id="map" 
       className={cn(
-        "w-full h-[50vh] rounded-lg border shadow-sm overflow-hidden",
+        "w-full h-[50vh] rounded-lg border shadow-xs overflow-hidden",
         className
       )} 
     />

@@ -38,16 +38,16 @@ const PostCard: React.FC<{ post: BlogPost }> = async ({ post }) => {
   return (
     <Link href={`/blog/post/${post.id}`}>
       <Card className="w-full h-64 flex flex-col">
-        <CardHeader className="flex-shrink-0">
+        <CardHeader className="shrink-0">
           <h2 className="text-xl font-bold truncate">{post.title}</h2>
         </CardHeader>
-        <CardContent className="flex-grow overflow-hidden">
+        <CardContent className="grow overflow-hidden">
           <div
             className="text-sm line-clamp-4"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </CardContent>
-        <CardFooter className="flex-shrink-0 flex justify-between items-center text-xs text-gray-500">
+        <CardFooter className="shrink-0 flex justify-between items-center text-xs text-gray-500">
           <div className="flex items-center">
             <Clock className="h-3 w-3 mr-1" />
             <span>
@@ -60,7 +60,7 @@ const PostCard: React.FC<{ post: BlogPost }> = async ({ post }) => {
             <span className="mr-2 truncate">
               By {userData.username || "Unknown User"}
             </span>
-            <Avatar className="h-6 w-6 flex-shrink-0">
+            <Avatar className="h-6 w-6 shrink-0">
               <AvatarImage
                 src={userData.image_url || undefined}
                 alt={userData.username || "Unknown User"}

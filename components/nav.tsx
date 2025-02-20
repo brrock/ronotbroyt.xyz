@@ -25,6 +25,9 @@ export function Nav() {
           <Link className="hover:underline" href="/game">
             Game
           </Link>
+          <Link className="hover:underline" href="/events">
+            Events
+          </Link>
         </nav>
       </div>
       <div className="relative flex-1 max-w-md space-x-4">

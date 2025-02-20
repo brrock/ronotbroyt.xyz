@@ -111,7 +111,7 @@ const Page: React.FC = () => {
       <Nav />
       <div className="container mx-auto p-4">
         <div
-          className="relative w-full h-64 bg-gradient-to-b from-blue-400 to-blue-600 overflow-hidden cursor-pointer rounded-lg"
+          className="relative w-full h-64 bg-linear-to-b from-blue-400 to-blue-600 overflow-hidden cursor-pointer rounded-lg"
           onClick={jump}
         >
           {/* Ground */}
