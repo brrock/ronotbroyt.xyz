@@ -33,18 +33,17 @@ const Home = async () => {
             bg-gradient-to-r from-primary to-accent 
             bg-clip-text 
             dark:bg-gradient-to-r dark:from-primary-foreground dark:to-accent-foreground 
-            animate-fade-in-up">
+            animate-fly-in">
             Welcome to <br/>RoNotBroYT&apos;s Official Website
           </h1>
-          <p className="text-xl md:text-2xl dark:text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl dark:text-muted-foreground max-w-3xl mx-auto animate-slide-in-right">
             Here we are dediacted to bringing you a fresh look at all things planes. Whether you are here to discover new videos, read our blog, or chat with fans, then you are in the right place.
-
           </p>
         </header>
 
         {christmas && (
           <div className="flex justify-center items-center space-x-4 
-            bg-secondary/20 backdrop-blur-sm rounded-xl p-6 animate-fade-in-up delay-200">
+            bg-secondary/20 backdrop-blur-sm rounded-xl p-6 animate-slide-in-left">
             <ChristmasCountdown />
             <Button variant="outline" className="ml-4">
               <Link href="/christmas">
@@ -55,8 +54,8 @@ const Home = async () => {
         )}
         
         {events.length > 0 && (
-          <section className="animate-fade-in-up delay-300">
-            <h2 className="text-3xl font-bold text-center mb-8 text-primary">
+          <section className="animate-slide-in-right">
+            <h2 className="text-3xl font-bold text-center mb-8 text-primary animate-fly-in">
               Upcoming Events
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -65,7 +64,7 @@ const Home = async () => {
                   key={event.id} 
                   className="bg-card/50 backdrop-blur-sm text-card-foreground border border-border/50 
                   rounded-xl p-6 hover:shadow-lg transition-all duration-300 
-                  hover:scale-105 hover:border-primary"
+                  hover:scale-105 hover:border-primary animate-pulse-glow"
                 >
                   <h3 className="text-xl font-semibold mb-2 text-primary">
                     {event.title}
@@ -86,7 +85,7 @@ const Home = async () => {
         )}
 
 
-        <section className="animate-fade-in-up delay-600">
+        <section className="animate-slide-in-left">
           <YouTubeVideos />
         </section>
       </div>
