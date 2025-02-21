@@ -1,27 +1,28 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, Youtube, MessageSquare } from "lucide-react"
-import { 
-  Sheet, 
-  SheetContent, 
+import * as React from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, Youtube, MessageSquare } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
   SheetTrigger,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/theme-toggle"
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/theme-toggle";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
+import { SignedOut } from "@clerk/nextjs";
 
 export function Nav() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="sticky top-4 z-50 mx-4">
@@ -36,35 +37,50 @@ export function Nav() {
             <NavigationMenuList className="hidden md:flex md:gap-6">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link href="/game" className="text-sm font-medium transition-colors hover:text-primary">
+                  <Link
+                    href="/game"
+                    className="text-sm font-medium transition-colors hover:text-primary"
+                  >
                     Game
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link href="/blog" className="text-sm font-medium transition-colors hover:text-primary">
+                  <Link
+                    href="/blog"
+                    className="text-sm font-medium transition-colors hover:text-primary"
+                  >
                     Blog
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link href="/forum" className="text-sm font-medium transition-colors hover:text-primary">
+                  <Link
+                    href="/forum"
+                    className="text-sm font-medium transition-colors hover:text-primary"
+                  >
                     Forum
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link href="https://discord.gg/your-server" className="text-sm font-medium transition-colors hover:text-primary">
+                  <Link
+                    href="https://discord.gg/your-server"
+                    className="text-sm font-medium transition-colors hover:text-primary"
+                  >
                     Discord
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link href="https://youtube.com/@your-channel" className="text-sm font-medium transition-colors hover:text-primary">
+                  <Link
+                    href="https://youtube.com/@your-channel"
+                    className="text-sm font-medium transition-colors hover:text-primary"
+                  >
                     YouTube
                   </Link>
                 </NavigationMenuLink>
@@ -75,19 +91,29 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           <div className="hidden md:flex md:items-center md:gap-2">
-            <Link href="/sign-in">
-              <Button variant="ghost" size="sm" className="rounded-full">Sign In</Button>
-            </Link>
-            <Link href="/sign-up">
-              <Button size="sm" className="rounded-full">Get Started</Button>
-            </Link>
+            <SignedOut>
+              <Link href="/sign-in">
+                <Button size="sm" className="rounded-full">
+                  Sign In
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button size="sm" className="rounded-full">
+                  Sign Up
+                </Button>
+              </Link>
+            </SignedOut>
           </div>
           <ModeToggle />
-          
+
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="sm" className="md:hidden rounded-full">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden rounded-full"
+              >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
@@ -97,32 +123,52 @@ export function Nav() {
                 <SheetTitle>Navigation Menu</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4 mt-6">
-                <Link href="/game" onClick={() => setIsOpen(false)} className="block px-2 py-1 text-lg">
+                <Link
+                  href="/game"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-2 py-1 text-lg"
+                >
                   Game
                 </Link>
-                <Link href="/blog" onClick={() => setIsOpen(false)} className="block px-2 py-1 text-lg">
+                <Link
+                  href="/blog"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-2 py-1 text-lg"
+                >
                   Blog
                 </Link>
-                <Link href="/forum" onClick={() => setIsOpen(false)} className="block px-2 py-1 text-lg">
+                <Link
+                  href="/forum"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-2 py-1 text-lg"
+                >
                   Forum
                 </Link>
-                <Link href="https://discord.gg/your-server" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-2 py-1 text-lg">
+                <Link
+                  href="https://discord.gg/your-server"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-2 py-1 text-lg"
+                >
                   <MessageSquare className="h-5 w-5" />
                   Discord
                 </Link>
-                <Link href="https://youtube.com/@your-channel" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-2 py-1 text-lg">
+                <Link
+                  href="https://youtube.com/@your-channel"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-2 py-1 text-lg"
+                >
                   <Youtube className="h-5 w-5" />
                   YouTube
                 </Link>
-                <div className="mt-4 space-y-2">
-                  <Link href="/sign-in" onClick={() => setIsOpen(false)}>
-                    <Button variant="outline" className="w-full rounded-full">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link href="/sign-up" onClick={() => setIsOpen(false)}>
-                    <Button className="w-full rounded-full">Get Started</Button>
-                  </Link>
+                <div className="mt-4 flex flex-col gap-2">
+                  <SignedOut>
+                    <Link href="/sign-in" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full rounded-full">Sign In</Button>
+                    </Link>
+                    <Link href="/sign-up" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full rounded-full">Sign Up</Button>
+                    </Link>
+                  </SignedOut>
                 </div>
               </nav>
             </SheetContent>
@@ -130,5 +176,5 @@ export function Nav() {
         </div>
       </div>
     </header>
-  )
-} 
+  );
+}
