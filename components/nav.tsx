@@ -68,7 +68,7 @@ export function Nav() {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="https://discord.gg/your-server"
+                    href="https://discord.gg/8cYecPmJ2N"
                     className="text-sm font-medium transition-colors hover:text-primary"
                   >
                     Discord
@@ -78,7 +78,7 @@ export function Nav() {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="https://youtube.com/@your-channel"
+                    href="https://www.youtube.com/@RoNotBroYT"
                     className="text-sm font-medium transition-colors hover:text-primary"
                   >
                     YouTube
@@ -148,7 +148,7 @@ export function Nav() {
                   Forum
                 </Link>
                 <Link
-                  href="https://discord.gg/your-server"
+                  href="https://discord.gg/8cYecPmJ2N"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2 px-2 py-1 text-lg"
                 >
@@ -156,7 +156,7 @@ export function Nav() {
                   Discord
                 </Link>
                 <Link
-                  href="https://youtube.com/@your-channel"
+                  href="https://www.youtube.com/@RoNotBroYT"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2 px-2 py-1 text-lg"
                 >
