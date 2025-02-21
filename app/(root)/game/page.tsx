@@ -3,104 +3,136 @@
 import { Nav } from "@/components/nav";
 import React, { useState, useEffect, useCallback } from "react";
 
-type ObstacleType = "spike" | "block";
-
-interface Obstacle {
+interface Cactus {
   x: number;
-  type: ObstacleType;
+  height: number;
 }
 
 const Page: React.FC = () => {
   const [playerY, setPlayerY] = useState<number>(0);
   const [isJumping, setIsJumping] = useState<boolean>(false);
-  const [obstacles, setObstacles] = useState<Obstacle[]>([]);
+  const [cacti, setCacti] = useState<Cactus[]>([]);
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
   const [highScore, setHighScore] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
 
-  const jumpHeight: number = 120;
-  const jumpDuration: number = 700; // ms
-  const gameSpeed: number = 5;
+  // Constants
+  const JUMP_HEIGHT = 120;
+  const JUMP_DURATION = 500; // ms
+  const BASE_SPEED = 6;
+  const ACCELERATION = 0.0005;
+  const CACTUS_WIDTH = 20;
+  const PLAYER_WIDTH = 20;
+  const PLAYER_HEIGHT = 30;
 
   const jump = useCallback(() => {
     if (!isJumping && !gameOver) {
       setIsJumping(true);
-      setPlayerY(jumpHeight);
+      setPlayerY(JUMP_HEIGHT);
+      
       setTimeout(() => {
-        setIsJumping(false);
-        setPlayerY(0);
-      }, jumpDuration);
+        if (!gameOver) {
+          setIsJumping(false);
+          setPlayerY(0);
+        }
+      }, JUMP_DURATION);
     }
   }, [isJumping, gameOver]);
 
   useEffect(() => {
-    const storedHighScore = localStorage.getItem("geometryDashHighScore");
+    const storedHighScore = localStorage.getItem("dinoHighScore");
     if (storedHighScore) setHighScore(parseInt(storedHighScore, 10));
 
+    let lastTime = performance.now();
     const gameLoop = setInterval(() => {
       if (!gameOver) {
-        setObstacles((prev) => [
-          ...prev
-            .filter((obs) => obs.x > -50)
-            .map((obs) => ({ ...obs, x: obs.x - gameSpeed })),
-          ...(Math.random() < 0.02
-            ? [
-                {
-                  x: 400,
-                  type: Math.random() < 0.5 ? "spike" : "block",
-                } as Obstacle,
-              ]
-            : []),
-        ]);
+        const currentTime = performance.now();
+        const deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
+
+        // Toggle running animation
+        setIsRunning(prev => !prev);
+        
+        // Move cacti
+        setCacti((prev) => {
+          const speed = BASE_SPEED + (score * ACCELERATION);
+          return [
+            ...prev
+              .filter((cactus) => cactus.x > -CACTUS_WIDTH)
+              .map((cactus) => ({ ...cactus, x: cactus.x - speed * (deltaTime / 16) })),
+            // Add new cactus with 2% chance per frame
+            ...(Math.random() < 0.01 && prev.length < 3 && 
+               (!prev.length || prev[prev.length - 1].x < 400)
+              ? [{ 
+                  x: 640,
+                  height: Math.random() < 0.5 ? 30 : 45
+                }] 
+              : []),
+          ];
+        });
+        
         setScore((prev) => prev + 1);
       }
-    }, 20);
+    }, 16);
 
     const collisionCheck = setInterval(() => {
-      const playerRect = { x: 50, y: 50 - playerY, width: 30, height: 30 };
-      obstacles.forEach((obs) => {
-        const obsRect = {
-          x: obs.x,
-          y: obs.type === "spike" ? 70 : 50,
-          width: 30,
-          height: 30,
+      if (gameOver) return;
+
+      const playerHitbox = {
+        x: 50 + 5,
+        y: 50 - playerY + 5,
+        width: PLAYER_WIDTH - 10,
+        height: PLAYER_HEIGHT - 10
+      };
+
+      cacti.forEach((cactus) => {
+        const cactusHitbox = {
+          x: cactus.x + 5,
+          y: 50,
+          width: CACTUS_WIDTH - 10,
+          height: cactus.height - 5
         };
+
         if (
-          playerRect.x < obsRect.x + obsRect.width &&
-          playerRect.x + playerRect.width > obsRect.x &&
-          playerRect.y < obsRect.y + obsRect.height &&
-          playerRect.y + playerRect.height > obsRect.y
+          playerHitbox.x < cactusHitbox.x + cactusHitbox.width &&
+          playerHitbox.x + playerHitbox.width > cactusHitbox.x &&
+          playerHitbox.y < cactusHitbox.y + cactusHitbox.height &&
+          playerHitbox.y + playerHitbox.height > cactusHitbox.y
         ) {
           handleGameOver();
         }
       });
-    }, 20);
+    }, 16);
 
     return () => {
       clearInterval(gameLoop);
       clearInterval(collisionCheck);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [obstacles, playerY, gameOver]);
+  }, [cacti, playerY, gameOver, score]);
 
   const handleGameOver = () => {
     setGameOver(true);
     if (score > highScore) {
       setHighScore(score);
-      localStorage.setItem("geometryDashHighScore", score.toString());
+      localStorage.setItem("dinoHighScore", score.toString());
     }
   };
 
   const restartGame = () => {
     setPlayerY(0);
-    setObstacles([]);
+    setCacti([]);
     setGameOver(false);
     setScore(0);
+    setIsJumping(false);
   };
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === "Space") jump();
+      if ((e.code === "Space" || e.code === "ArrowUp") && !e.repeat) {
+        e.preventDefault();
+        jump();
+      }
     };
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
@@ -111,55 +143,86 @@ const Page: React.FC = () => {
       <Nav />
       <div className="container mx-auto p-4">
         <div
-          className="relative w-full h-64 bg-linear-to-b from-blue-400 to-blue-600 overflow-hidden cursor-pointer rounded-lg"
+          className="relative w-full h-64 bg-white dark:bg-gray-900 overflow-hidden cursor-pointer rounded-lg select-none"
           onClick={jump}
         >
           {/* Ground */}
-          <div className="absolute bottom-0 w-full h-12 bg-gray-800" />
+          <div className="absolute bottom-0 w-full h-12 bg-gray-200 dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700" />
+          
+          {/* Ground dots */}
+          <div className="absolute bottom-0 w-full">
+            {Array.from({ length: 50 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute bottom-2 w-1 h-1 bg-gray-400 dark:bg-gray-600 rounded-full"
+                style={{ left: `${i * 20}px` }}
+              />
+            ))}
+          </div>
 
-          {/* Player */}
+          {/* Dino */}
           <div
-            className="absolute w-8 h-8 bg-yellow-400 transition-all duration-500"
-            style={{ bottom: `${12 + playerY}px`, left: "50px" }}
-          />
+            className="absolute transition-transform"
+            style={{
+              bottom: `${12 + playerY}px`,
+              left: "50px",
+              width: '20px',
+              height: '30px',
+              transitionProperty: 'transform, bottom',
+              transitionDuration: `${JUMP_DURATION}ms`,
+              transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            }}
+          >
+            <div className="w-full h-full bg-gray-800 dark:bg-gray-200" style={{
+              clipPath: isJumping 
+                ? 'polygon(0% 0%, 100% 0%, 100% 100%, 60% 100%, 60% 80%, 0% 80%)'
+                : isRunning
+                ? 'polygon(0% 0%, 100% 0%, 100% 80%, 60% 80%, 60% 100%, 0% 100%)'
+                : 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
+            }} />
+          </div>
 
-          {/* Obstacles */}
-          {obstacles.map((obs, index) => (
+          {/* Cacti */}
+          {cacti.map((cactus, index) => (
             <div
               key={index}
-              className={`absolute w-8 h-8 ${obs.type === "spike" ? "bg-red-500" : "bg-gray-600"}`}
+              className="absolute bg-gray-800 dark:bg-gray-200"
               style={{
-                bottom: obs.type === "spike" ? "12px" : "12px",
-                left: `${obs.x}px`,
-                clipPath:
-                  obs.type === "spike"
-                    ? "polygon(50% 0%, 0% 100%, 100% 100%)"
-                    : "none",
+                bottom: '12px',
+                left: `${cactus.x}px`,
+                width: `${CACTUS_WIDTH}px`,
+                height: `${cactus.height}px`,
+                clipPath: 'polygon(20% 0%, 80% 0%, 80% 100%, 60% 100%, 60% 20%, 40% 20%, 40% 100%, 20% 100%)'
               }}
             />
           ))}
 
           {/* Score */}
-          <div className="absolute top-2 left-2 text-xl font-bold text-white">
-            Score: {score}
+          <div className="absolute top-2 right-2 text-xl font-mono text-gray-800 dark:text-gray-200">
+            {String(score).padStart(5, '0')}
           </div>
 
-          {/* Death Screen */}
+          {/* Game Over */}
           {gameOver && (
-            <div className="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg text-center">
                 <h2 className="text-3xl font-bold mb-4 text-red-600 dark:text-red-400">
-                  Game Over
+                  GAME OVER
                 </h2>
-                <p className="text-xl mb-2 dark:text-white">Score: {score}</p>
-                <p className="text-xl mb-4 dark:text-white">
-                  High Score: {highScore}
+                <p className="font-mono mb-2 dark:text-white">
+                  SCORE: {String(score).padStart(5, '0')}
+                </p>
+                <p className="font-mono mb-4 dark:text-white">
+                  HI: {String(highScore).padStart(5, '0')}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Press SPACE to Jump
                 </p>
                 <button
                   className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                   onClick={restartGame}
                 >
-                  Play Again
+                  RESTART
                 </button>
               </div>
             </div>
