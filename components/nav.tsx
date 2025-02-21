@@ -123,7 +123,7 @@ export function Nav() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <SheetHeader>
-                <SheetTitle>Navigation Menu</SheetTitle>
+                <SheetTitle></SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4 mt-6">
                 <Link
