@@ -19,7 +19,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,7 +102,10 @@ export function Nav() {
                   Sign Up
                 </Button>
               </Link>
-            </SignedOut>
+                      </SignedOut>
+                      <SignedIn>
+                    <UserButton />
+                  </SignedIn>
           </div>
           <ModeToggle />
 
@@ -163,12 +166,17 @@ export function Nav() {
                 <div className="mt-4 flex flex-col gap-2">
                   <SignedOut>
                     <Link href="/sign-in" onClick={() => setIsOpen(false)}>
-                      <Button variant="outline" className="w-full rounded-full">Sign In</Button>
+                      <Button variant="outline" className="w-full rounded-full">
+                        Sign In
+                      </Button>
                     </Link>
                     <Link href="/sign-up" onClick={() => setIsOpen(false)}>
                       <Button className="w-full rounded-full">Sign Up</Button>
                     </Link>
                   </SignedOut>
+                  <SignedIn>
+                    <UserButton />
+                  </SignedIn>
                 </div>
               </nav>
             </SheetContent>
