@@ -1,13 +1,12 @@
 import ChristmasCountdown from "@/components/christmascount";
-import { Nav } from "@/components/nav";
 import { YouTubeVideos } from "@/components/youtubevideos";
 
 import { Button } from "@/components/ui/button";
-import { SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react"
 import { get } from "@vercel/edge-config";
 import prisma from "@/db/prisma";
+import { Nav } from "@/components/nav";
 
 const Home = async () => {
   const celebration = await get('celebration');

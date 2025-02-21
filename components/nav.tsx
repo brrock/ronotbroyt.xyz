@@ -1,59 +1,134 @@
-import Link from "next/link";
-import { Button } from "./ui/button";
-import { ModeToggle } from "./theme-toggle";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+"use client"
+
+import * as React from "react"
+import { useState } from "react"
+import Link from "next/link"
+import { Menu, Youtube, MessageSquare } from "lucide-react"
+import { 
+  Sheet, 
+  SheetContent, 
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/theme-toggle"
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu"
 
 export function Nav() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <header className="flex h-16 items-center justify-between  px-4 md:px-6">
-      <div className="flex items-center gap-4 text-center">
-        <Link href="/">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-lg">RoNotBroYT</span>
+    <header className="sticky top-4 z-50 mx-4">
+      <div className="container flex h-14 items-center justify-between rounded-full border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center space-x-2">
+            <span className="font-mono font-bold text-lg">RoNotBroYT</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <NavigationMenu>
+            <NavigationMenuList className="hidden md:flex md:gap-6">
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/game" className="text-sm font-medium transition-colors hover:text-primary">
+                    Game
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/blog" className="text-sm font-medium transition-colors hover:text-primary">
+                    Blog
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/forum" className="text-sm font-medium transition-colors hover:text-primary">
+                    Forum
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="https://discord.gg/your-server" className="text-sm font-medium transition-colors hover:text-primary">
+                    Discord
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="https://youtube.com/@your-channel" className="text-sm font-medium transition-colors hover:text-primary">
+                    YouTube
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="hidden md:flex md:items-center md:gap-2">
+            <Link href="/sign-in">
+              <Button variant="ghost" size="sm" className="rounded-full">Sign In</Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button size="sm" className="rounded-full">Get Started</Button>
+            </Link>
           </div>
-        </Link>
-        <nav className="hidden gap-4 text-sm font-medium md:flex">
-          <Link className="hover:underline" href="/">
-            Home
-          </Link>
-          <Link className="hover:underline" href="/blog">
-            Blog
-          </Link>
-          <Link className="hover:underline" href="/forum">
-            Forum
-          </Link>
-          <Link className="hover:underline" href="/game">
-            Game
-          </Link>
-          <Link className="hover:underline" href="/events">
-            Events
-          </Link>
-        </nav>
-      </div>
-      <div className="relative flex-1 max-w-md space-x-4">
-        <SignedOut>
-          <Button
-            asChild
-            className="  bg-red-800 hover:bg-red-900 dark:text-white  opacity-60"
-          >
-            <Link className="" href="/sign-in">
-              Sign In
-            </Link>
-          </Button>
-          <Button
-            asChild
-            className=" bg-blue-800 hover:bg-blue-900 dark:text-white opacity-60"
-          >
-            <Link className="" href="/sign-up">
-              Sign Up
-            </Link>
-          </Button>
-        </SignedOut>
-        <ModeToggle />
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+          <ModeToggle />
+          
+          {/* Mobile Navigation */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="sm" className="md:hidden rounded-full">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetHeader>
+                <SheetTitle>Navigation Menu</SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col gap-4 mt-6">
+                <Link href="/game" onClick={() => setIsOpen(false)} className="block px-2 py-1 text-lg">
+                  Game
+                </Link>
+                <Link href="/blog" onClick={() => setIsOpen(false)} className="block px-2 py-1 text-lg">
+                  Blog
+                </Link>
+                <Link href="/forum" onClick={() => setIsOpen(false)} className="block px-2 py-1 text-lg">
+                  Forum
+                </Link>
+                <Link href="https://discord.gg/your-server" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-2 py-1 text-lg">
+                  <MessageSquare className="h-5 w-5" />
+                  Discord
+                </Link>
+                <Link href="https://youtube.com/@your-channel" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-2 py-1 text-lg">
+                  <Youtube className="h-5 w-5" />
+                  YouTube
+                </Link>
+                <div className="mt-4 space-y-2">
+                  <Link href="/sign-in" onClick={() => setIsOpen(false)}>
+                    <Button variant="outline" className="w-full rounded-full">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href="/sign-up" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full rounded-full">Get Started</Button>
+                  </Link>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
-  );
-}
+  )
+} 
