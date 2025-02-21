@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Youtube } from 'lucide-react';
-import Image from 'next/image';
 
 interface YouTubeVideo {
   id: string;
@@ -70,7 +69,7 @@ export function YouTubeVideos() {
               key={video.id} 
               className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
             >
-              <Image 
+              <img 
                 src={video.snippet.thumbnails.medium.url} 
                 alt={video.snippet.title} 
                 className="w-full h-36 object-cover"
